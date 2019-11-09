@@ -1,0 +1,25 @@
+{
+  "name": "aws-secrets-manager-actions",
+  "version": "1.0.0",
+  "description": "GitHub Actions for AWS Secrets Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint index.js && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/say8425/aws-secrets-manager-action.git"
+  },
+  "keywords": [
+    "aws",
+    "actions",
+    "github",
+    "secrets-manager"
+  ],
+  "author": "Penguin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/say8425/aws-secrets-manager-action/issues"
+  },
+  "homepage": "https://github.com/say8425/aws-secrets-manager-action#readme"
+}
