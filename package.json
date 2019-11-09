@@ -21,5 +21,14 @@
   "bugs": {
     "url": "https://github.com/say8425/aws-secrets-manager-action/issues"
   },
-  "homepage": "https://github.com/say8425/aws-secrets-manager-action#readme"
+  "homepage": "https://github.com/say8425/aws-secrets-manager-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "aws-sdk": "^2.568.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0"
+  }
 }
