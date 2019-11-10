@@ -4,6 +4,8 @@
   "description": "GitHub Actions for AWS Secrets Manager",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint index.js",
+    "package": "ncc build index.js -o dist",
     "test": "eslint index.js && jest"
   },
   "repository": {
