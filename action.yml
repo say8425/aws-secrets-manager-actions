@@ -1,7 +1,7 @@
 name: 'aws-secrets-manager-actions'
 description: 'GitHub Actions for AWS Secrets Manager'
 inputs:
-  secret-name:
+  SECRET_NAME:
     description: 'Set secret name that you want to get.'
     required: true
   AWS_ACCESS_KEY_ID:

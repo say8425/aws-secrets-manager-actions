@@ -1,7 +1,7 @@
 import core from '@actions/core'
 import AWS from 'aws-sdk'
 
-const secretName = core.getInput('secret-name')
+const secretName = core.getInput('SECRET_NAME')
 const secretsManager = new AWS.SecretsManager({
   accessKeyId: core.getInput('AWS_ACCESS_KEY_ID'),
   secretAccessKey: core.getInput('AWS_SECRET_ACCESS_KEY'),
