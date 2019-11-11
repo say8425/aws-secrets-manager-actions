@@ -7,7 +7,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
       - name: Test
-        uses: yarn test
+        run: yarn test
         env:
           INPUT_SECRET_NAME: ${{ secrets.SECRET_NAME }}
           INPUT_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
