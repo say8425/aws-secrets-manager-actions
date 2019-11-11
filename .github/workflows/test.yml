@@ -6,7 +6,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Test
+      - name: Install Packages
+        run: yarn install
+      - name: Run Test
         run: yarn test
         env:
           INPUT_SECRET_NAME: ${{ secrets.SECRET_NAME }}
