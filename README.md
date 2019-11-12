@@ -1,6 +1,8 @@
 # AWS Secrets Manager Actions
 
-https://img.shields.io/npm/v/aws-secrets-manager-actions
+[![npm version](https://img.shields.io/npm/v/aws-secrets-manager-actions.svg?style=flat)](https://github.com/say8425/aws-secrets-manager-action)
+![GitHub Actions Test](https://github.com/say8425/aws-secrets-manager-action/workflows/Test/badge.svg)
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 This GitHub Action helps you use your Environment values that stored in AWS Secrets Manager.
 
