@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/say8425/aws-secrets-manager-action/issues"
   },
-  "homepage": "https://github.com/say8425/aws-secrets-manager-action#readme",
+  "homepage": "https://github.com/say8425/aws-secrets-manager-action",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "aws-sdk": "^2.568.0"
