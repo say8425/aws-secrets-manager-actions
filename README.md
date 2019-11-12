@@ -10,11 +10,18 @@ This GitHub Action helps you use your Environment values that stored in AWS Secr
 
 ```yaml
 steps:
-- uses: zhulik/redis-action@v1.0.0
-  with:
-    redis version: '5'
+ - name: Store ENV from AWS SecretManager
+   uses: say8425/aws-secrets-manager-action@0.9.0
+   with:
+     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+     AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+     SECRET_NAME: ${{ secrets.SECRET_NAME }}
 ```
 
+First of all, you need your AWS Access Key and Secret Access Key. You can create it at AWS IAM.
+And we greatly recommend storing these keys in your GitHub Repository Secret.
+Then your secrets will be stored at Environment Variables in your Actions.
 
 ## Contributing
 
