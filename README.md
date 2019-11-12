@@ -11,7 +11,7 @@ This GitHub Action helps you use your Environment values that stored in AWS Secr
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-action@0.9.0
+   uses: say8425/aws-secrets-manager-actions@0.9.0
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
