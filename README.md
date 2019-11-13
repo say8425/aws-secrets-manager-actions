@@ -6,6 +6,11 @@
 
 This GitHub Action helps you use your Environment values that stored in AWS Secrets Manager.
 
+## 🚨 Warning: This action is not worked
+
+This action has a [error](https://github.com/say8425/aws-secrets-manager-actions/issues/6), so it did not worked yet. We continue to fix it. But you can help us.
+So feel free to contribute.
+
 ## Usage
 
 ```yaml
