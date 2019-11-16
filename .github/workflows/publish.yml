@@ -1,0 +1,23 @@
+name: Publish
+on: publish
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Install Packages
+        run: yarn install
+      - name: Run Test
+        run: yarn test --passWithNoTests
+        env:
+          INPUT_SECRET_NAME: ${{ secrets.SECRET_NAME }}
+          INPUT_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          INPUT_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          INPUT_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          INPUT_AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
+      - name: Publish    
+        uses: epeli/npm-release@v1
+        with:
+            type: stable
+            token: ${{ secrets.NPM_TOKEN }}
