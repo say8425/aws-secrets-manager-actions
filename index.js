@@ -1,8 +1,8 @@
-import core from '@actions/core'
-import AWS from 'aws-sdk'
+const core = require('@actions/core')
+const aws = require('aws-sdk')
 
 const secretName = core.getInput('SECRET_NAME')
-const secretsManager = new AWS.SecretsManager({
+const secretsManager = new aws.SecretsManager({
   accessKeyId: core.getInput('AWS_ACCESS_KEY_ID'),
   secretAccessKey: core.getInput('AWS_SECRET_ACCESS_KEY'),
   region: core.getInput('AWS_DEFAULT_REGION')
