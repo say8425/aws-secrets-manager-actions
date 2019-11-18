@@ -1,6 +1,6 @@
 {
   "name": "aws-secrets-manager-actions",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "GitHub Actions for AWS Secrets Manager",
   "main": "index.js",
   "scripts": {
