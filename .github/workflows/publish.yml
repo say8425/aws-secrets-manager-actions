@@ -1,7 +1,7 @@
 name: Publish
 on:
   release:
-    types: [published, edited]
+    types: [published]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
           INPUT_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           INPUT_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           INPUT_AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
-      - name: Publish    
+      - name: Publish
         uses: epeli/npm-release@v1
         with:
             type: stable
