@@ -11,8 +11,8 @@ jobs:
       - name: Run Test
         run: yarn test --passWithNoTests
         env:
-          INPUT_SECRET_NAME: ${{ secrets.SECRET_NAME }}
-          INPUT_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          INPUT_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          INPUT_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          INPUT_AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
+          SECRET_NAME: ${{ secrets.SECRET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
