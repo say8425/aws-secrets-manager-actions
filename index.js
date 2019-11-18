@@ -8,11 +8,11 @@ const secretsManager = new aws.SecretsManager({
   region: core.getInput('AWS_DEFAULT_REGION')
 })
 
-async function getSecretValue (secretName) {
+async function getSecretValue (secretsManager, secretName) {
   return secretsManager.getSecretValue({ SecretId: secretName }).promise()
 }
 
-getSecretValue(secretName).then(resp => {
+getSecretValue(secretsManager, secretName).then(resp => {
   core.setSecret(resp.SecretString)
   const secret = resp.SecretString
 
@@ -27,3 +27,5 @@ getSecretValue(secretName).then(resp => {
 }).catch(err => {
   core.setFailed(err)
 })
+
+exports.getSecretValue = getSecretValue
