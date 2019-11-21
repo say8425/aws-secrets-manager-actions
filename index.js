@@ -13,12 +13,12 @@ async function getSecretValue (secretsManager, secretName) {
 }
 
 getSecretValue(secretsManager, secretName).then(resp => {
-  core.setSecret(resp.SecretString)
   const secret = resp.SecretString
 
   if (secret) {
     const parsedSecret = JSON.parse(secret)
     Object.entries(parsedSecret).forEach(([key, value]) => {
+      core.setSecret(value)
       core.exportVariable(key, value)
     })
   } else {
