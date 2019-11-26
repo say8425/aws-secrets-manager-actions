@@ -5,7 +5,7 @@
 [![GitHub Actions Publish](https://github.com/say8425/aws-secrets-manager-actions/workflows/Publish/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3APublish)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/say8425/aws-secrets-manager-actions/blob/master/LICENSE)
 
-This GitHub Action helps you use your Environment values from AWS Secrets Manager.
+This GitHub Action helps you use your Environment values from [AWS Secrets Manager](https://aws.amazon.com/secrets-manager).
 
 ## Usage
 
