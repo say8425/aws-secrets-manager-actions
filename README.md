@@ -22,7 +22,7 @@ steps:
 
 ### AWS IAM
 
-You need [AWS IAM](https://aws.amazon.com/iam) user that has proper policy to access AWS Secrets Manager. And this IAM user keys at `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and region `AWS_DEFAULT_REGION`. But we greatly recommend to store the keys at [GitHub Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) and use it.
+You need [AWS IAM](https://aws.amazon.com/iam) user that has proper policy to access AWS Secrets Manager. Add this IAM user keys at `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and region `AWS_DEFAULT_REGION`. But we greatly recommend to store the keys at [GitHub Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) and use it.
 
 #### Policy
 
