@@ -12,7 +12,7 @@ This GitHub Action helps you use your Environment values from AWS Secrets Manage
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v0.9.4
+   uses: say8425/aws-secrets-manager-actions@v0.10.0
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -49,7 +49,7 @@ Add you want to get secret name from secrets list.
 
 ### Environments
 
-Then you can use your all secrects from AWS Secrets Manager through Environment values.
+Then you can use your all secrects stored from AWS Secrets Manager through Environment values. And these environment values are masked with `***`. so never can be revealed.
 
 ## Contributing
 
