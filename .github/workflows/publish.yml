@@ -11,7 +11,7 @@ jobs:
       - name: Install Packages
         run: yarn install
       - name: Run Test
-        run: yarn test --passWithNoTests
+        run: yarn test
         env:
           SECRET_NAME: ${{ secrets.SECRET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
