@@ -5,6 +5,7 @@ categories:
       - 'feature'
   - title: '🛠 Fixes'
     label:
+      - 'fix'
       - 'bug'
   - title: '🧰 Maintenance'
     label:
