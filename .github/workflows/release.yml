@@ -1,0 +1,24 @@
+name: Release
+on:
+  release:
+    types: [published]
+jobs:
+  release github:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Install Packages
+        run: yarn install
+      - name: Release GitHub Actions
+        uses: technote-space/release-github-actions@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          BRANCH_NAME: release
+          PACKAGE_MANAGER: yarn
+          BUILD_COMMAND: package
+      - name: Release NPM
+        uses: epeli/npm-release@v1
+        with:
+          type: stable
+          token: ${{ secrets.NPM_TOKEN }}
