@@ -3,7 +3,7 @@ on:
   release:
     types: [published]
 jobs:
-  release github:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
