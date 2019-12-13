@@ -16,7 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
           BRANCH_NAME: master
           PACKAGE_MANAGER: yarn
-          BUILD_COMMAND: package
+          BUILD_COMMAND: yarn package
       - name: Release NPM
         uses: epeli/npm-release@v1
         with:
