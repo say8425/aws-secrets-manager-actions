@@ -1,19 +1,17 @@
-name-template: 'v$NEXT_PATCH_VERSION 🌈'
+name-template: 'v$NEXT_PATCH_VERSION'
 categories:
-  - title: '🚀 Features'
+  - title: 'Features'
     labels:
       - 'feature'
-  - title: '🛠 Fixes'
+  - title: 'Fixes'
     labels:
       - 'fix'
       - 'bug'
-  - title: '🧰 Maintenance'
+  - title: 'Maintenance'
     labels:
       - 'documentation'
       - 'security'
       - 'devops'
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR '
 template: |
-  ## Changes
-
   $CHANGES
