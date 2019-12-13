@@ -1,10 +1,11 @@
 name-template: 'v$NEXT_PATCH_VERSION 🌈'
 categories:
   - title: '🚀 Features'
-    labels:
+    label:
       - 'feature'
   - title: '🛠 Fixes'
-    labels:
+    label:
+      - 'fix'
       - 'bug'
   - title: '🧰 Maintenance'
     label:
