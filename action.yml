@@ -1,0 +1,21 @@
+name: 'aws-secrets-manager-actions'
+description: 'GitHub Actions for AWS Secrets Manager'
+inputs:
+  SECRET_NAME:
+    description: 'Set secret name that you want to get.'
+    required: true
+  AWS_ACCESS_KEY_ID:
+    description: 'Set Aws Access Key ID'
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: 'Set Aws Secret access Key'
+    required: true
+  AWS_DEFAULT_REGION:
+    description: 'Set Aws default region'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'lock'
+  color: 'orange'
