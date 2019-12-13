@@ -14,7 +14,6 @@ jobs:
         uses: technote-space/release-github-actions@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-          BRANCH_NAME: master
           PACKAGE_MANAGER: yarn
           BUILD_COMMAND: yarn package
       - name: Release NPM
