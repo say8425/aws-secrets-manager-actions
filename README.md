@@ -5,7 +5,7 @@
 [![GitHub Actions Publish](https://github.com/say8425/aws-secrets-manager-actions/workflows/Publish/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3APublish)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/say8425/aws-secrets-manager-actions/blob/master/LICENSE)
 
-This GitHub Action helps you use your Environment values that stored at [AWS Secrets Manager](https://aws.amazon.com/secrets-manager).
+This GitHub Action helps you define your secrets that stored in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager)  to environment values.
 
 ## Usage
 
@@ -20,8 +20,8 @@ steps:
      SECRET_NAME: ${{ secrets.SECRET_NAME }}
 ```
 
-Add your AWS IAM keys. And add you want to use secret name from your AWS Secrets Manager secrets list.
-Then your secrets will be environment values.
+Add your AWS IAM keys and you secret name that you want to use from your AWS Secrets Manager secrets list.
+Then your secrets will be defined environment values.
 
 ### AWS IAM
 
