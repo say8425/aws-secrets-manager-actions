@@ -1,4 +1,4 @@
-name: 'aws-secrets-manager-actions'
+name: 'aws-sm-actions'
 description: 'GitHub Actions for AWS Secrets Manager'
 inputs:
   SECRET_NAME:
