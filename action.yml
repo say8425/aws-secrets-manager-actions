@@ -13,6 +13,9 @@ inputs:
   AWS_DEFAULT_REGION:
     description: 'Set Aws default region'
     required: true
+  OUTPUT_PATH:
+    description: 'Set output file where variables are write'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

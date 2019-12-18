@@ -1,6 +1,8 @@
 const core = require('@actions/core')
 const aws = require('aws-sdk')
+const fs = require('fs')
 
+const outputPath = core.getInput('OUTPUT_PATH')
 const secretName = core.getInput('SECRET_NAME')
 const secretsManager = new aws.SecretsManager({
   accessKeyId: core.getInput('AWS_ACCESS_KEY_ID'),
@@ -21,6 +23,10 @@ getSecretValue(secretsManager, secretName).then(resp => {
       core.setSecret(value)
       core.exportVariable(key, value)
     })
+    if (outputPath) {
+      const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}="${value}"`).join('\n')
+      fs.writeFileSync(outputPath, secretsAsEnv)
+    }
   } else {
     core.warning(`${secretName} has no secret values`)
   }
