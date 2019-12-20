@@ -18,6 +18,7 @@ steps:
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
      SECRET_NAME: ${{ secrets.SECRET_NAME }}
+     OUTPUT_PATH: '.env' # optional
 ```
 
 Add your AWS IAM keys and you secret name that you want to use from your AWS Secrets Manager secrets list.
@@ -57,6 +58,12 @@ You can use only one secret name.
 
 Your secrets will be environment values.
 And these environment values are masked with `***`. So never be revealed.
+
+### Export environment variables to file
+
+You can export these environment variables to file with `OUTPUT_PATH` input parameter.
+When you define `OUTPUT_PATH`, then action create a file named as you defined.
+And environments will be exported into this file.   
 
 ## Contributing
 
