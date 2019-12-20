@@ -1,6 +1,6 @@
 {
   "name": "xmlbuilder",
-  "version": "11.0.1",
+  "version": "9.0.7",
   "keywords": [
     "xml",
     "xmlbuilder"
@@ -18,7 +18,6 @@
     "url": "http://github.com/oozcitak/xmlbuilder-js/issues"
   },
   "main": "./lib/index",
-  "typings": "./typings/index.d.ts",
   "engines": {
     "node": ">=4.0"
   },
@@ -28,11 +27,10 @@
     "mocha": "*",
     "coffee-coverage": "2.*",
     "istanbul": "*",
-    "coveralls": "*",
-    "xpath": "*"
+    "coveralls": "*"
   },
   "scripts": {
-    "prepublishOnly": "coffee -co lib src",
+    "prepublish": "coffee -co lib src",
     "postpublish": "rm -rf lib",
     "test": "mocha \"test/**/*.coffee\" && istanbul report text lcov"
   }
