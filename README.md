@@ -54,7 +54,7 @@ And you can get more information at [AWS User Guide](https://docs.aws.amazon.com
 Add you want to use secret name from your AWS Secrets Manager secrets list.
 You can use only one secret name.
 
-### Environments
+### Environment Values
 
 Your secrets will be environment values.
 And these environment values are masked with `***`. So never be revealed.
