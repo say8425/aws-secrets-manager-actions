@@ -30,8 +30,8 @@ getSecretValue(secretsManager, secretName).then(resp => {
         fs.writeFileSync(outputPath, secretsAsEnv)
       }
     } catch (e) {
-        core.setSecret(value)
-        fs.writeFileSync(outputPath, value)
+        core.setSecret(secret)
+        fs.writeFileSync(outputPath, secret)
     }
   } else {
     core.warning(`${secretName} has no secret values`)
