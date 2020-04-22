@@ -16,6 +16,9 @@ inputs:
   OUTPUT_PATH:
     description: 'Set output file where variables are write'
     required: false
+  STRING_SECRET:
+    description: 'String Secret instead of json'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
