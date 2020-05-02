@@ -16,14 +16,14 @@ async function getSecretValue (secretsManager, secretName) {
 }
 
 getSecretValue(secretsManager, secretName).then(resp => {
-  const secret = resp.SecretString
-  if (secret == null) {
+  const secretString = resp.SecretString
+  if (secretString == null) {
     core.warning(`${secretName} has no secret values`)
     return
   }
 
   try {
-    const parsedSecret = JSON.parse(secret)
+    const parsedSecret = JSON.parse(secretString)
     Object.entries(parsedSecret).forEach(([key, value]) => {
       core.setSecret(value)
       core.exportVariable(key, value)
@@ -33,10 +33,10 @@ getSecretValue(secretsManager, secretName).then(resp => {
       fs.writeFileSync(outputPath, secretsAsEnv)
     }
   } catch (e) {
-    core.setSecret(secret)
-    core.exportVariable('asm_secret', secret)
+    core.setSecret(secretString)
+    core.exportVariable('asm_secret', secretString)
     if (outputPath) {
-      fs.writeFileSync(outputPath, secret)
+      fs.writeFileSync(outputPath, secretString)
     }
   }
 }).catch(err => {
