@@ -29,13 +29,12 @@ getSecretValue(secretsManager, secretName).then(resp => {
         const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
         fs.writeFileSync(outputPath, secretsAsEnv)
       }
-    } catch(e) {
+    } catch (e) {
       core.setSecret(secret)
-      core.exportVariable("asm_secret", secret)
-      if(outputPath) {
+      core.exportVariable('asm_secret', secret)
+      if (outputPath) {
         fs.writeFileSync(outputPath, secret)
       }
-      
     }
   } else {
     core.warning(`${secretName} has no secret values`)
