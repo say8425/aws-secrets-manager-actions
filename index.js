@@ -17,27 +17,27 @@ async function getSecretValue (secretsManager, secretName) {
 
 getSecretValue(secretsManager, secretName).then(resp => {
   const secret = resp.SecretString
-
-  if (secret) {
-    try {
-      const parsedSecret = JSON.parse(secret)
-      Object.entries(parsedSecret).forEach(([key, value]) => {
-        core.setSecret(value)
-        core.exportVariable(key, value)
-      })
-      if (outputPath) {
-        const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
-        fs.writeFileSync(outputPath, secretsAsEnv)
-      }
-    } catch (e) {
-      core.setSecret(secret)
-      core.exportVariable('asm_secret', secret)
-      if (outputPath) {
-        fs.writeFileSync(outputPath, secret)
-      }
-    }
-  } else {
+  if (secret == null) {
     core.warning(`${secretName} has no secret values`)
+    return
+  }
+
+  try {
+    const parsedSecret = JSON.parse(secret)
+    Object.entries(parsedSecret).forEach(([key, value]) => {
+      core.setSecret(value)
+      core.exportVariable(key, value)
+    })
+    if (outputPath) {
+      const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
+      fs.writeFileSync(outputPath, secretsAsEnv)
+    }
+  } catch (e) {
+    core.setSecret(secret)
+    core.exportVariable('asm_secret', secret)
+    if (outputPath) {
+      fs.writeFileSync(outputPath, secret)
+    }
   }
 }).catch(err => {
   core.setFailed(err)
