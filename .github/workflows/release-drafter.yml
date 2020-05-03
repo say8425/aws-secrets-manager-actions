@@ -1,8 +1,7 @@
 name: Release Drafter
 on:
   push:
-    branches:
-      - master
+    branches: [master]
 jobs:
   release-draft:
     runs-on: ubuntu-latest
