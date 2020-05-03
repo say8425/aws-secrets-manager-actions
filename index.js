@@ -17,6 +17,8 @@ async function getSecretValue (secretsManager, secretName) {
 
 getSecretValue(secretsManager, secretName).then(resp => {
   const secretString = resp.SecretString
+  core.setSecret(secretString)
+
   if (secretString == null) {
     core.warning(`${secretName} has no secret values`)
     return
@@ -33,7 +35,6 @@ getSecretValue(secretsManager, secretName).then(resp => {
       fs.writeFileSync(outputPath, secretsAsEnv)
     }
   } catch (e) {
-    core.setSecret(secretString)
     core.exportVariable('asm_secret', secretString)
     if (outputPath) {
       fs.writeFileSync(outputPath, secretString)
