@@ -35,6 +35,7 @@ getSecretValue(secretsManager, secretName).then(resp => {
       fs.writeFileSync(outputPath, secretsAsEnv)
     }
   } catch (e) {
+    core.warning('Parsing asm secret is failed. Secret will be store in asm_secret')
     core.exportVariable('asm_secret', secretString)
     if (outputPath) {
       fs.writeFileSync(outputPath, secretString)
