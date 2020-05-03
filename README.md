@@ -59,6 +59,12 @@ You can use only one secret name.
 Your secrets will be environment values.
 And these environment values are masked with `***`. So never be revealed.
 
+#### Raw string values
+
+Most of the secrets are can be parsed.
+But some case, parsing can be failed, like invalid json.
+In this case, this unparsed raw sting will be stored in `asm_secret` env key.  
+
 ### Export environment variables to file
 
 You can export these environment variables to file with `OUTPUT_PATH` input parameter.
