@@ -1,19 +1,3 @@
-// // import { getSecretValue } from './index.js'
-//
-// const index = require('./index.js')
-//
-// describe("Index File", () => {
-//   test("it should has ENV File", async () => {
-//     const INPUT_SECRET_NAME = 'pongdang-env-test'
-//     process.env.INPUT_AWS_ACCESS_KEY_ID = 'AKIAXIPQLXCNPTH4UN6K'
-//     process.env.INPUT_AWS_SECRET_ACCESS_KEY = '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'
-//     process.env.INPUT_AWS_DEFAULT_REGION = 'ap-northeast-1'
-//
-//     const data = await index.getSecretValue(INPUT_SECRET_NAME)
-//     expect(data).toEqual('Mark')
-//   })
-// })
-
 const aws = require('aws-sdk')
 const index = require('./index.js')
 
