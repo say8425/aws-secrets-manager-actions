@@ -52,6 +52,9 @@ typings/
 # Optional npm cache directory
 .npm
 
+# NPM Lock Package
+package-lock.json
+
 # Optional eslint cache
 .eslintcache
 
