@@ -14,13 +14,26 @@ jobs:
           node-version: '12.x'
       - name: Install Packages
         run: yarn install
-      - name: Release GitHub Actions
+      - name: Release to GitHub Actions Market
         uses: technote-space/release-github-actions@v6
         with:
           PACKAGE_MANAGER: yarn
           BUILD_COMMAND: yarn package
-      - name: Release NPM
-        uses: epeli/npm-release@v1
+      - name: Setup nodejs for NPM Registry
+        uses: actions/setup-node@v1
         with:
-          type: stable
-          token: ${{ secrets.NPM_TOKEN }}
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Rlease to NPM Registry
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Setup nodejs for NPM Registry
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Rlease to GitHub Registry
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
