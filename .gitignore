@@ -94,3 +94,6 @@ package-lock.json
 
 # Jetbrains IDE
 .idea
+
+# asdf nodejs version
+.tool-versions
