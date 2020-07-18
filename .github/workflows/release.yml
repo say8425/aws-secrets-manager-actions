@@ -14,6 +14,8 @@ jobs:
           node-version: '12.x'
       - name: Install Packages
         run: yarn install
+      - name: Bump package Version
+        run: npm version --message "Bump v%s" --new-version from-git
       - name: Release to GitHub Actions Market
         uses: technote-space/release-github-actions@v6
         with:
