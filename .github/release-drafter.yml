@@ -9,9 +9,10 @@ categories:
       - 'bug'
   - title: 'Maintenance'
     labels:
-      - 'documentation'
-      - 'security'
-      - 'devops'
+      - 'dependencies'
+      - 'docs'
+      - 'ci'
+      - 'refactor'
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR '
 template: |
   $CHANGES
