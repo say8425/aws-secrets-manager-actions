@@ -14,8 +14,15 @@ jobs:
           node-version: '12.x'
       - name: Install Packages
         run: yarn install
-      - name: Bump package Version
-        run: npm version --message "Bump v%s" --new-version from-git
+      - name: Bump new Package Version
+        run: npm version --new-version ${{ github.event.release.tag_name }} -no-git-tag-version
+      - name: Commit new Package Version
+        uses: EndBug/add-and-commit@v5
+        with:
+          message: 'ci: Bump ${{ github.event.release.tag_name }}'
+          add: 'package.json'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release to GitHub Actions Market
         uses: technote-space/release-github-actions@v6
         with:
