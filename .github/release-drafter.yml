@@ -1,18 +1,18 @@
 name-template: 'v$NEXT_PATCH_VERSION'
 categories:
-  - title: 'Features'
+  - title: '⚡️ Features'
     labels:
-      - 'feature'
-  - title: 'Fixes'
+      - '⚡️ feature'
+  - title: '🛠 Fixes'
     labels:
-      - 'fix'
-      - 'bug'
-  - title: 'Maintenance'
+      - '🐛 bug'
+      - '🚨 security'
+  - title: '⚙️ Maintenance'
     labels:
-      - 'dependencies'
-      - 'docs'
-      - 'ci'
-      - 'refactor'
+      - '📦 dependencies'
+      - '📄 docs'
+      - '🏭 ci'
+      - '⚙️ refactor'
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR '
 template: |
   $CHANGES
