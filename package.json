@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/say8425/aws-secrets-manager-actions",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "aws-sdk": "^2.668.0"
   },
   "devDependencies": {
