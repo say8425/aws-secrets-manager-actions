@@ -97,3 +97,5 @@ package-lock.json
 
 # asdf nodejs version
 .tool-versions
+
+dist
