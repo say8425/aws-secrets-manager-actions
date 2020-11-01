@@ -24,15 +24,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install Packages
         run: yarn install
-      - name: Bump new Package Version
-        run: npm version --new-version ${{ github.event.release.tag_name }} -no-git-tag-version
-      - name: Commit new Package Version
-        uses: EndBug/add-and-commit@v5
+      - name: Check package version
+        uses: technote-space/package-version-check-action@v1
         with:
-          message: 'ci: Bump ${{ github.event.release.tag_name }}'
-          add: 'package.json'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_DISABLED: 1
       - name: Release to GitHub Actions Market
         uses: technote-space/release-github-actions@v6
         with:
