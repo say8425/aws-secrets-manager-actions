@@ -28,26 +28,17 @@ jobs:
         uses: technote-space/package-version-check-action@v1
         with:
           COMMIT_DISABLED: 1
+      - name: Rlease to NPM Registry
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: Rlease to GitHub Registry
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          registry: 'https://npm.pkg.github.com'
       - name: Release to GitHub Actions Market
         uses: technote-space/release-github-actions@v6
         with:
           PACKAGE_MANAGER: yarn
           BUILD_COMMAND: yarn package
-      - name: Setup nodejs for NPM Registry
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Rlease to NPM Registry
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Setup nodejs for NPM Registry
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-          registry-url: 'https://npm.pkg.github.com'
-      - name: Rlease to GitHub Registry
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
