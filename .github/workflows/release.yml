@@ -28,7 +28,7 @@ jobs:
         uses: technote-space/package-version-check-action@v1
         with:
           COMMIT_DISABLED: 1
-      - name: Rlease to NPM Registry
+      - name: Release to NPM Registry
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
