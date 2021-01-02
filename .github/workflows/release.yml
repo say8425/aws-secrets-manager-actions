@@ -170,7 +170,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           SECRET_NAME: ${{ secrets.SECRET_NAME }}
       - name: Should have SCIENTIFIC_NAME
-        uses: therussiankid92/gat@v1
+        uses: therussiankid92/gat@v1.5
         with:
           assertion: should.equal
           expected: Pygoscelis adeliae
