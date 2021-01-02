@@ -25,10 +25,41 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn --prefer-offline
-  check-package-version:
+  test:
     runs-on: ubuntu-latest
     needs:
       - install-dependencies
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Set yarn cache directory path
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Restore dependencies from cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn --prefer-offline
+      - name: Run Test
+        run: yarn test
+        env:
+          SECRET_NAME: ${{ secrets.SECRET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
+  release-npm:
+    runs-on: ubuntu-latest
+    needs:
+      - test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -52,67 +83,14 @@ jobs:
         uses: technote-space/package-version-check-action@v1
         with:
           COMMIT_DISABLED: 1
-  release-npm:
-    runs-on: ubuntu-latest
-    needs:
-      - check-package-version
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup node.js
-        uses: actions/setup-node@v1
+      - name: Rlease to NPM Registry
+        uses: JS-DevTools/npm-publish@v1
         with:
-          node-version: '12.x'
-      - name: Set yarn cache directory path
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Restore dependencies from cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        run: yarn --prefer-offline
-      - name: Release to NPM
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  release-github-package:
-    runs-on: ubuntu-latest
-    needs:
-      - check-package-version
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup node.js for GitHub Packages
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@say8425'
-      - name: Set yarn cache directory path
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Restore dependencies from cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        run: yarn --prefer-offline
-      - name: Release to GitHub Packages
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
   release-github-actions:
     runs-on: ubuntu-latest
     needs:
       - release-npm
-      - release-github-package
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -140,7 +118,7 @@ jobs:
   test-github-actions:
     runs-on: ubuntu-latest
     needs:
-      - install-dependencies
+      - release-github-actions
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -170,7 +148,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           SECRET_NAME: ${{ secrets.SECRET_NAME }}
       - name: Should have SCIENTIFIC_NAME
-        uses: therussiankid92/gat
+        uses: therussiankid92/gat@v1.5
         with:
           assertion: should.equal
           expected: Pygoscelis adeliae
