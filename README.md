@@ -12,7 +12,7 @@ This GitHub Action helps you define your secrets that stored in [AWS Secrets Man
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v1
+   uses: say8425/aws-secrets-manager-actions@v2
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
