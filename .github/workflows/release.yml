@@ -111,7 +111,7 @@ jobs:
       - name: Install dependencies
         run: yarn --prefer-offline
       - name: Release to GitHub Actions
-        uses: technote-space/release-github-actions@v6
+        uses: technote-space/release-github-actions@v7.1
         with:
           PACKAGE_MANAGER: yarn
           BUILD_COMMAND: yarn package
