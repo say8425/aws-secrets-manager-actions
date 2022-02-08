@@ -9,6 +9,20 @@ This GitHub Action helps you define your secrets that stored in [AWS Secrets Man
 
 ## Usage
 
+## 1. Using github [openid-connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) (Recommented)
+
+```yaml
+steps:
+ - name: Store ENV from AWS SecretManager
+   uses: say8425/aws-secrets-manager-actions@v2
+   with:
+     AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
+     SECRET_NAME: ${{ env.SECRET_NAME }}
+     OUTPUT_PATH: '.env' # optional
+```
+
+## 2. Using github secrets
+
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager

@@ -6,13 +6,16 @@ inputs:
     required: true
   AWS_ACCESS_KEY_ID:
     description: 'Set Aws Access Key ID'
-    required: true
+    required: false
   AWS_SECRET_ACCESS_KEY:
     description: 'Set Aws Secret access Key'
-    required: true
+    required: false
+  AWS_SESSION_TOKEN:
+    description: 'Set Aws Session token Key'
+    required: false
   AWS_DEFAULT_REGION:
     description: 'Set Aws default region'
-    required: true
+    required: false
   OUTPUT_PATH:
     description: 'Set output file where variables are write'
     required: false
