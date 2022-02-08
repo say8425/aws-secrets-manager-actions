@@ -11,6 +11,20 @@ This GitHub Action lets you export secrets stored in [AWS Secrets Manager](https
 
 Add the AWS IAM keys and the secret name that you want to use from your AWS Secrets Manager secrets list to your GitHub repo secrets. Then, in the GitHub actions yaml, add the following step.
 
+1. Using github [openid-connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) (Recommented)
+
+```yaml
+steps:
+ - name: Store ENV from AWS SecretManager
+   uses: say8425/aws-secrets-manager-actions@v2
+   with:
+     AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
+     SECRET_NAME: ${{ env.SECRET_NAME }}
+     OUTPUT_PATH: '.env' # optional
+```
+
+2. Using github secrets
+
 ```yaml
 steps:
  - name: Export ENV from AWS SecretManager

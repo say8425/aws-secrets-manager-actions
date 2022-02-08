@@ -6,11 +6,17 @@ describe('get SecretString from AWS SecretsManager', () => {
   describe('get parsable data', () => {
     beforeAll(async () => {
       const INPUT_SECRET_NAME = process.env.SECRET_NAME
-      const secretsManager = new aws.SecretsManager({
+      const AWSConfig = {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
         region: process.env.AWS_DEFAULT_REGION
-      })
+      }
+
+      if (process.env.AWS_SESSION_TOKEN) {
+        AWSConfig.sessionToken = process.env.AWS_SESSION_TOKEN
+      }
+
+      const secretsManager = new aws.SecretsManager(AWSConfig)
       data = await index.getSecretValue(secretsManager, INPUT_SECRET_NAME)
     })
 
