@@ -1,5 +1,5 @@
-import * as core from '@actions/core'
-import { SecretsManager } from 'aws-sdk'
+const core = require('@actions/core')
+const aws = require('aws-sdk')
 const fs = require('fs')
 
 const outputPath = core.getInput('OUTPUT_PATH')
@@ -15,7 +15,7 @@ if (core.getInput('AWS_SESSION_TOKEN') || process.env.AWS_SESSION_TOKEN) {
   AWSConfig.sessionToken = core.getInput('AWS_SESSION_TOKEN') || process.env.AWS_SESSION_TOKEN
 }
 
-const secretsManager = new SecretsManager(AWSConfig)
+const secretsManager = new aws.SecretsManager(AWSConfig)
 
 async function getSecretValue (secretsManager, secretName) {
   return secretsManager.getSecretValue({ SecretId: secretName }).promise()
