@@ -6,6 +6,7 @@ describe('get SecretString from AWS SecretsManager', () => {
   describe('get parsable data', () => {
     beforeAll(async () => {
       const INPUT_SECRET_NAME = process.env.SECRET_NAME
+
       const AWSConfig = {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
