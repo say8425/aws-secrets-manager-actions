@@ -54,7 +54,7 @@ var PromisesDependency;
  *
  * @!attribute computeChecksums
  *   @return [Boolean] whether to compute checksums for payload bodies when
- *     the service accepts it (currently supported in S3 only).
+ *     the service accepts it (currently supported in S3 and SQS only).
  *
  * @!attribute convertResponseTypes
  *   @return [Boolean] whether types are converted when parsing response data.
@@ -117,7 +117,7 @@ var PromisesDependency;
  *       retry count and error and returns the amount of time to delay in
  *       milliseconds. If the result is a non-zero negative value, no further
  *       retry attempts will be made. The `base` option will be ignored if this
- *       option is supplied.
+ *       option is supplied. The function is only called for retryable errors.
  *
  * @!attribute httpOptions
  *   @return [map] A set of options to pass to the low-level HTTP request.
@@ -133,9 +133,9 @@ var PromisesDependency;
  *       failing to establish a connection with the server after
  *       `connectTimeout` milliseconds. This timeout has no effect once a socket
  *       connection has been established.
- *     * **timeout** [Integer] &mdash; Sets the socket to timeout after timeout
- *       milliseconds of inactivity on the socket. Defaults to two minutes
- *       (120000)
+ *     * **timeout** [Integer] &mdash; The number of milliseconds a request can
+ *       take before automatically being terminated.
+ *       Defaults to two minutes (120000).
  *     * **xhrAsync** [Boolean] &mdash; Whether the SDK will send asynchronous
  *       HTTP requests. Used in the browser environment only. Set to false to
  *       send requests synchronously. Defaults to true (async on).
@@ -185,7 +185,13 @@ var PromisesDependency;
  * @!attribute stsRegionalEndpoints
  *   @return ['legacy'|'regional'] whether to send sts request to global endpoints or
  *     regional endpoints.
- *     Defaults to 'legacy'
+ *     Defaults to 'legacy'.
+ *
+ * @!attribute useFipsEndpoint
+ *   @return [Boolean] Enables FIPS compatible endpoints. Defaults to `false`.
+ *
+ * @!attribute useDualstackEndpoint
+ *   @return [Boolean] Enables IPv6 dualstack endpoint. Defaults to `false`.
  */
 AWS.Config = AWS.util.inherit({
   /**
@@ -270,7 +276,7 @@ AWS.Config = AWS.util.inherit({
    *     retry count and error and returns the amount of time to delay in
    *     milliseconds. If the result is a non-zero negative value, no further
    *     retry attempts will be made. The `base` option will be ignored if this
-   *     option is supplied.
+   *     option is supplied. The function is only called for retryable errors.
    * @option options httpOptions [map] A set of options to pass to the low-level
    *   HTTP request. Currently supported options are:
    *
@@ -340,6 +346,10 @@ AWS.Config = AWS.util.inherit({
    * @option options stsRegionalEndpoints ['legacy'|'regional'] whether to send sts request
    *   to global endpoints or regional endpoints.
    *   Defaults to 'legacy'.
+   * @option options useFipsEndpoint [Boolean] Enables FIPS compatible endpoints.
+   *   Defaults to `false`.
+   * @option options useDualstackEndpoint [Boolean] Enables IPv6 dualstack endpoint.
+   *   Defaults to `false`.
    */
   constructor: function Config(options) {
     if (options === undefined) options = {};
@@ -563,7 +573,9 @@ AWS.Config = AWS.util.inherit({
     endpointDiscoveryEnabled: undefined,
     endpointCacheSize: 1000,
     hostPrefixEnabled: true,
-    stsRegionalEndpoints: 'legacy'
+    stsRegionalEndpoints: 'legacy',
+    useFipsEndpoint: false,
+    useDualstackEndpoint: false
   },
 
   /**

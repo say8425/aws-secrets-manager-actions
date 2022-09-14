@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class ES extends Service {
   /**
@@ -104,6 +104,22 @@ declare class ES extends Service {
    */
   deletePackage(callback?: (err: AWSError, data: ES.Types.DeletePackageResponse) => void): Request<ES.Types.DeletePackageResponse, AWSError>;
   /**
+   * Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.
+   */
+  describeDomainAutoTunes(params: ES.Types.DescribeDomainAutoTunesRequest, callback?: (err: AWSError, data: ES.Types.DescribeDomainAutoTunesResponse) => void): Request<ES.Types.DescribeDomainAutoTunesResponse, AWSError>;
+  /**
+   * Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.
+   */
+  describeDomainAutoTunes(callback?: (err: AWSError, data: ES.Types.DescribeDomainAutoTunesResponse) => void): Request<ES.Types.DescribeDomainAutoTunesResponse, AWSError>;
+  /**
+   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   */
+  describeDomainChangeProgress(params: ES.Types.DescribeDomainChangeProgressRequest, callback?: (err: AWSError, data: ES.Types.DescribeDomainChangeProgressResponse) => void): Request<ES.Types.DescribeDomainChangeProgressResponse, AWSError>;
+  /**
+   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   */
+  describeDomainChangeProgress(callback?: (err: AWSError, data: ES.Types.DescribeDomainChangeProgressResponse) => void): Request<ES.Types.DescribeDomainChangeProgressResponse, AWSError>;
+  /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
   describeElasticsearchDomain(params: ES.Types.DescribeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
@@ -192,6 +208,14 @@ declare class ES extends Service {
    */
   getCompatibleElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
   /**
+   * Returns a list of versions of the package, along with their creation time and commit message.
+   */
+  getPackageVersionHistory(params: ES.Types.GetPackageVersionHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetPackageVersionHistoryResponse) => void): Request<ES.Types.GetPackageVersionHistoryResponse, AWSError>;
+  /**
+   * Returns a list of versions of the package, along with their creation time and commit message.
+   */
+  getPackageVersionHistory(callback?: (err: AWSError, data: ES.Types.GetPackageVersionHistoryResponse) => void): Request<ES.Types.GetPackageVersionHistoryResponse, AWSError>;
+  /**
    * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
    */
   getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
@@ -207,6 +231,10 @@ declare class ES extends Service {
    * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
    */
   getUpgradeStatus(callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * Returns the name of all Elasticsearch domains owned by the current user's account. 
+   */
+  listDomainNames(params: ES.Types.ListDomainNamesRequest, callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
   /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
@@ -292,6 +320,14 @@ declare class ES extends Service {
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
   /**
+   * Updates a package for use with Amazon ES domains.
+   */
+  updatePackage(params: ES.Types.UpdatePackageRequest, callback?: (err: AWSError, data: ES.Types.UpdatePackageResponse) => void): Request<ES.Types.UpdatePackageResponse, AWSError>;
+  /**
+   * Updates a package for use with Amazon ES domains.
+   */
+  updatePackage(callback?: (err: AWSError, data: ES.Types.UpdatePackageResponse) => void): Request<ES.Types.UpdatePackageResponse, AWSError>;
+  /**
    * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
    */
   upgradeElasticsearchDomain(params: ES.Types.UpgradeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
@@ -365,6 +401,18 @@ declare namespace ES {
      * True if the internal user database is enabled.
      */
     InternalUserDatabaseEnabled?: Boolean;
+    /**
+     * Describes the SAML application configured for a domain.
+     */
+    SAMLOptions?: SAMLOptionsOutput;
+    /**
+     * Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+     */
+    AnonymousAuthDisableDate?: DisableTimestamp;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
@@ -379,6 +427,14 @@ declare namespace ES {
      * Credentials for the master user: username and password, ARN, or both.
      */
     MasterUserOptions?: MasterUserOptions;
+    /**
+     * Specifies the SAML application configuration for the domain.
+     */
+    SAMLOptions?: SAMLOptionsInput;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
@@ -406,6 +462,110 @@ declare namespace ES {
      */
     DomainPackageDetails?: DomainPackageDetails;
   }
+  export interface AutoTune {
+    /**
+     * Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. 
+     */
+    AutoTuneType?: AutoTuneType;
+    /**
+     * Specifies details of the Auto-Tune action. See the Developer Guide for more information. 
+     */
+    AutoTuneDetails?: AutoTuneDetails;
+  }
+  export type AutoTuneDate = Date;
+  export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string;
+  export interface AutoTuneDetails {
+    ScheduledAutoTuneDetails?: ScheduledAutoTuneDetails;
+  }
+  export type AutoTuneList = AutoTune[];
+  export interface AutoTuneMaintenanceSchedule {
+    /**
+     * Specifies timestamp at which Auto-Tune maintenance schedule start. 
+     */
+    StartAt?: StartAt;
+    /**
+     * Specifies maintenance schedule duration: duration value and duration unit. See the Developer Guide for more information.
+     */
+    Duration?: Duration;
+    /**
+     * Specifies cron expression for a recurring maintenance schedule. See the Developer Guide for more information.
+     */
+    CronExpressionForRecurrence?: String;
+  }
+  export type AutoTuneMaintenanceScheduleList = AutoTuneMaintenanceSchedule[];
+  export interface AutoTuneOptions {
+    /**
+     * Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. 
+     */
+    DesiredState?: AutoTuneDesiredState;
+    /**
+     * Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. 
+     */
+    RollbackOnDisable?: RollbackOnDisable;
+    /**
+     * Specifies list of maitenance schedules. See the Developer Guide for more information.
+     */
+    MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
+  }
+  export interface AutoTuneOptionsInput {
+    /**
+     * Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. 
+     */
+    DesiredState?: AutoTuneDesiredState;
+    /**
+     * Specifies list of maitenance schedules. See the Developer Guide for more information.
+     */
+    MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
+  }
+  export interface AutoTuneOptionsOutput {
+    /**
+     * Specifies the AutoTuneState for the Elasticsearch domain.
+     */
+    State?: AutoTuneState;
+    /**
+     * Specifies the error message while enabling or disabling the Auto-Tune.
+     */
+    ErrorMessage?: String;
+  }
+  export interface AutoTuneOptionsStatus {
+    /**
+     *  Specifies Auto-Tune options for the specified Elasticsearch domain.
+     */
+    Options?: AutoTuneOptions;
+    /**
+     *  Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.
+     */
+    Status?: AutoTuneStatus;
+  }
+  export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string;
+  export interface AutoTuneStatus {
+    /**
+     * Timestamp which tells Auto-Tune options creation date .
+     */
+    CreationDate: UpdateTimestamp;
+    /**
+     * Timestamp which tells Auto-Tune options last updated time.
+     */
+    UpdateDate: UpdateTimestamp;
+    /**
+     * Specifies the Auto-Tune options latest version.
+     */
+    UpdateVersion?: UIntValue;
+    /**
+     * Specifies the AutoTuneState for the Elasticsearch domain.
+     */
+    State: AutoTuneState;
+    /**
+     * Specifies the error message while enabling or disabling the Auto-Tune options.
+     */
+    ErrorMessage?: String;
+    /**
+     * Indicates whether the Elasticsearch domain is being deleted.
+     */
+    PendingDeletion?: Boolean;
+  }
+  export type AutoTuneType = "SCHEDULED_ACTION"|string;
+  export type BackendRole = string;
   export type Boolean = boolean;
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
     /**
@@ -418,6 +578,67 @@ declare namespace ES {
      * The current status of the Elasticsearch service software update.
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  }
+  export interface ChangeProgressDetails {
+    /**
+     * The unique change identifier associated with a specific domain configuration change.
+     */
+    ChangeId?: GUID;
+    /**
+     * Contains an optional message associated with the domain configuration change.
+     */
+    Message?: Message;
+  }
+  export interface ChangeProgressStage {
+    /**
+     * The name of the specific progress stage.
+     */
+    Name?: ChangeProgressStageName;
+    /**
+     * The overall status of a specific progress stage.
+     */
+    Status?: ChangeProgressStageStatus;
+    /**
+     * The description of the progress stage.
+     */
+    Description?: Description;
+    /**
+     * The last updated timestamp of the progress stage.
+     */
+    LastUpdated?: LastUpdated;
+  }
+  export type ChangeProgressStageList = ChangeProgressStage[];
+  export type ChangeProgressStageName = string;
+  export type ChangeProgressStageStatus = string;
+  export interface ChangeProgressStatusDetails {
+    /**
+     * The unique change identifier associated with a specific domain configuration change.
+     */
+    ChangeId?: GUID;
+    /**
+     * The time at which the configuration change is made on the domain.
+     */
+    StartTime?: UpdateTimestamp;
+    /**
+     * The overall status of the domain configuration change. This field can take the following values: PENDING, PROCESSING, COMPLETED and FAILED
+     */
+    Status?: OverallChangeStatus;
+    /**
+     * The list of properties involved in the domain configuration change that are still in pending.
+     */
+    PendingProperties?: StringList;
+    /**
+     * The list of properties involved in the domain configuration change that are completed.
+     */
+    CompletedProperties?: StringList;
+    /**
+     * The total number of stages required for the configuration change.
+     */
+    TotalNumberOfStages?: TotalNumberOfStages;
+    /**
+     * The specific stages that the domain is going through to perform the configuration change.
+     */
+    ChangeProgressStages?: ChangeProgressStageList;
   }
   export type CloudWatchLogsLogGroupArn = string;
   export interface CognitoOptions {
@@ -448,6 +669,13 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface ColdStorageOptions {
+    /**
+     * Enable cold storage option. Accepted values true or false
+     */
+    Enabled: Boolean;
+  }
+  export type CommitMessage = string;
   export type CompatibleElasticsearchVersionsList = CompatibleVersionsMap[];
   export interface CompatibleVersionsMap {
     /**
@@ -514,6 +742,14 @@ declare namespace ES {
      * Specifies advanced security options.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
+    /**
+     * Specifies Auto-Tune options.
+     */
+    AutoTuneOptions?: AutoTuneOptionsInput;
+    /**
+     * A list of Tag added during domain creation.
+     */
+    TagList?: TagList;
   }
   export interface CreateElasticsearchDomainResponse {
     /**
@@ -634,6 +870,47 @@ declare namespace ES {
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentType = string;
+  export interface DescribeDomainAutoTunesRequest {
+    /**
+     * Specifies the domain name for which you want Auto-Tune action details.
+     */
+    DomainName: DomainName;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeDomainAutoTunesResponse {
+    /**
+     * Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the Developer Guide for more information.
+     */
+    AutoTunes?: AutoTuneList;
+    /**
+     * Specifies an identifier to allow retrieval of paginated results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeDomainChangeProgressRequest {
+    /**
+     * The domain you want to get the progress information about.
+     */
+    DomainName: DomainName;
+    /**
+     * The specific change ID for which you want to get progress information. This is an optional parameter. If omitted, the service returns information about the most recent configuration change. 
+     */
+    ChangeId?: GUID;
+  }
+  export interface DescribeDomainChangeProgressResponse {
+    /**
+     * Progress information for the configuration change that is requested in the DescribeDomainChangeProgress request. 
+     */
+    ChangeProgressStatus?: ChangeProgressStatusDetails;
+  }
   export interface DescribeElasticsearchDomainConfigRequest {
     /**
      * The Elasticsearch domain that you want to get information about.
@@ -818,6 +1095,8 @@ declare namespace ES {
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
   }
+  export type Description = string;
+  export type DisableTimestamp = Date;
   export interface DissociatePackageRequest {
     /**
      * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
@@ -843,6 +1122,18 @@ declare namespace ES {
      * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy which supports TLSv1.0 and higher. Policy-Min-TLS-1-2-2019-07:  TLS security policy which supports only TLSv1.2  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
+    /**
+     * Specify if custom endpoint should be enabled for the Elasticsearch domain.
+     */
+    CustomEndpointEnabled?: Boolean;
+    /**
+     * Specify the fully qualified domain for your custom endpoint.
+     */
+    CustomEndpoint?: DomainNameFqdn;
+    /**
+     * Specify ACM certificate ARN for your custom endpoint.
+     */
+    CustomEndpointCertificateArn?: ARN;
   }
   export interface DomainEndpointOptionsStatus {
     /**
@@ -860,6 +1151,10 @@ declare namespace ES {
      *  Specifies the DomainName.
      */
     DomainName?: DomainName;
+    /**
+     *  Specifies the EngineType of the domain.
+     */
+    EngineType?: EngineType;
   }
   export type DomainInfoList = DomainInfo[];
   export interface DomainInformation {
@@ -868,6 +1163,7 @@ declare namespace ES {
     Region?: Region;
   }
   export type DomainName = string;
+  export type DomainNameFqdn = string;
   export type DomainNameList = DomainName[];
   export interface DomainPackageDetails {
     /**
@@ -894,6 +1190,7 @@ declare namespace ES {
      * State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
      */
     DomainPackageStatus?: DomainPackageStatus;
+    PackageVersion?: PackageVersion;
     /**
      * The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.
      */
@@ -906,6 +1203,28 @@ declare namespace ES {
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export type Double = number;
+  export type DryRun = boolean;
+  export interface DryRunResults {
+    /**
+     *  Specifies the deployment mechanism through which the update shall be applied on the domain. Possible responses are Blue/Green (The update will require a blue/green deployment.) DynamicUpdate (The update can be applied in-place without a Blue/Green deployment required.) Undetermined (The domain is undergoing an update which needs to complete before the deployment type can be predicted.) None (The configuration change matches the current configuration and will not result in any update.) 
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Contains an optional message associated with the DryRunResults.
+     */
+    Message?: Message;
+  }
+  export interface Duration {
+    /**
+     *  Integer to specify the value of a maintenance schedule duration. See the Developer Guide for more information.
+     */
+    Value?: DurationValue;
+    /**
+     * Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the Developer Guide for more information.
+     */
+    Unit?: TimeUnit;
+  }
+  export type DurationValue = number;
   export interface EBSOptions {
     /**
      * Specifies whether EBS-based storage is enabled.
@@ -977,6 +1296,10 @@ declare namespace ES {
      * The number of warm nodes in the cluster.
      */
     WarmCount?: IntegerClass;
+    /**
+     * Specifies the ColdStorageOptions config for Elasticsearch Domain
+     */
+    ColdStorageOptions?: ColdStorageOptions;
   }
   export interface ElasticsearchClusterConfigStatus {
     /**
@@ -1041,6 +1364,14 @@ declare namespace ES {
      * Specifies AdvancedSecurityOptions for the domain. 
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus;
+    /**
+     * Specifies AutoTuneOptions for the domain. 
+     */
+    AutoTuneOptions?: AutoTuneOptionsStatus;
+    /**
+     * Specifies change details of the domain configuration change.
+     */
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -1132,6 +1463,14 @@ declare namespace ES {
      * The current status of the Elasticsearch domain's advanced security options.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptions;
+    /**
+     * The current status of the Elasticsearch domain's Auto-Tune options.
+     */
+    AutoTuneOptions?: AutoTuneOptionsOutput;
+    /**
+     * Specifies change details of the domain configuration change.
+     */
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -1168,6 +1507,7 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
+  export type EngineType = "OpenSearch"|"Elasticsearch"|string;
   export interface ErrorDetails {
     ErrorType?: ErrorType;
     ErrorMessage?: ErrorMessage;
@@ -1194,6 +1534,28 @@ declare namespace ES {
      *  A map of compatible Elasticsearch versions returned as part of the  GetCompatibleElasticsearchVersions  operation. 
      */
     CompatibleElasticsearchVersions?: CompatibleElasticsearchVersionsList;
+  }
+  export interface GetPackageVersionHistoryRequest {
+    /**
+     * Returns an audit history of versions of the package.
+     */
+    PackageID: PackageID;
+    /**
+     * Limits results to a maximum number of versions.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetPackageVersionHistoryResponse {
+    PackageID?: PackageID;
+    /**
+     * List of PackageVersionHistory objects.
+     */
+    PackageVersionHistoryList?: PackageVersionHistoryList;
+    NextToken?: String;
   }
   export interface GetUpgradeHistoryRequest {
     DomainName: DomainName;
@@ -1288,9 +1650,15 @@ declare namespace ES {
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
+  export interface ListDomainNamesRequest {
+    /**
+     *  Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. 
+     */
+    EngineType?: EngineType;
+  }
   export interface ListDomainNamesResponse {
     /**
-     * List of Elasticsearch domain names.
+     * List of domain names and respective engine types.
      */
     DomainNames?: DomainInfoList;
   }
@@ -1408,7 +1776,7 @@ declare namespace ES {
      */
     Status?: OptionStatus;
   }
-  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|string;
+  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string;
   export interface MasterUserOptions {
     /**
      * ARN for the master user (if IAM is enabled).
@@ -1425,6 +1793,7 @@ declare namespace ES {
   }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
+  export type Message = string;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
   export interface NodeToNodeEncryptionOptions {
@@ -1501,6 +1870,7 @@ declare namespace ES {
   }
   export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string;
   export type OutboundCrossClusterSearchConnections = OutboundCrossClusterSearchConnection[];
+  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
   export type OwnerId = string;
   export type PackageDescription = string;
   export interface PackageDetails {
@@ -1528,6 +1898,8 @@ declare namespace ES {
      * Timestamp which tells creation date of the package.
      */
     CreatedAt?: CreatedAt;
+    LastUpdatedAt?: LastUpdated;
+    AvailablePackageVersion?: PackageVersion;
     /**
      * Additional information if the package is in an error state. Null otherwise.
      */
@@ -1548,6 +1920,22 @@ declare namespace ES {
   }
   export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
   export type PackageType = "TXT-DICTIONARY"|string;
+  export type PackageVersion = string;
+  export interface PackageVersionHistory {
+    /**
+     * Version of the package.
+     */
+    PackageVersion?: PackageVersion;
+    /**
+     * A message associated with the version.
+     */
+    CommitMessage?: CommitMessage;
+    /**
+     * Timestamp which tells creation time of the package version.
+     */
+    CreatedAt?: CreatedAt;
+  }
+  export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
   export type PolicyDocument = string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
@@ -1702,8 +2090,94 @@ declare namespace ES {
   export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
   export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
   export type RoleArn = string;
+  export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
   export type S3BucketName = string;
   export type S3Key = string;
+  export type SAMLEntityId = string;
+  export interface SAMLIdp {
+    /**
+     * The Metadata of the SAML application in xml format.
+     */
+    MetadataContent: SAMLMetadata;
+    /**
+     * The unique Entity ID of the application in SAML Identity Provider.
+     */
+    EntityId: SAMLEntityId;
+  }
+  export type SAMLMetadata = string;
+  export interface SAMLOptionsInput {
+    /**
+     * True if SAML is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * Specifies the SAML Identity Provider's information.
+     */
+    Idp?: SAMLIdp;
+    /**
+     * The SAML master username, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserName?: Username;
+    /**
+     * The backend role to which the SAML master user is mapped to.
+     */
+    MasterBackendRole?: BackendRole;
+    /**
+     * The key to use for matching the SAML Subject attribute.
+     */
+    SubjectKey?: String;
+    /**
+     * The key to use for matching the SAML Roles attribute.
+     */
+    RolesKey?: String;
+    /**
+     * The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.
+     */
+    SessionTimeoutMinutes?: IntegerClass;
+  }
+  export interface SAMLOptionsOutput {
+    /**
+     * True if SAML is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * Describes the SAML Identity Provider's information.
+     */
+    Idp?: SAMLIdp;
+    /**
+     * The key used for matching the SAML Subject attribute.
+     */
+    SubjectKey?: String;
+    /**
+     * The key used for matching the SAML Roles attribute.
+     */
+    RolesKey?: String;
+    /**
+     * The duration, in minutes, after which a user session becomes inactive.
+     */
+    SessionTimeoutMinutes?: IntegerClass;
+  }
+  export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
+  export type ScheduledAutoTuneDescription = string;
+  export interface ScheduledAutoTuneDetails {
+    /**
+     * Specifies timestamp for the Auto-Tune action scheduled for the domain. 
+     */
+    Date?: AutoTuneDate;
+    /**
+     * Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. 
+     */
+    ActionType?: ScheduledAutoTuneActionType;
+    /**
+     * Specifies Auto-Tune action description. 
+     */
+    Action?: ScheduledAutoTuneDescription;
+    /**
+     * Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. 
+     */
+    Severity?: ScheduledAutoTuneSeverityType;
+  }
+  export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string;
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version that is present on the domain.
@@ -1755,6 +2229,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type StartAt = Date;
   export interface StartElasticsearchServiceSoftwareUpdateRequest {
     /**
      * The name of the domain that you want to update to the latest service software.
@@ -1806,6 +2281,8 @@ declare namespace ES {
   export type TagKey = string;
   export type TagList = Tag[];
   export type TagValue = string;
+  export type TimeUnit = "HOURS"|string;
+  export type TotalNumberOfStages = number;
   export type UIntValue = number;
   export interface UpdateElasticsearchDomainConfigRequest {
     /**
@@ -1852,12 +2329,53 @@ declare namespace ES {
      * Specifies advanced security options.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
+    /**
+     * Specifies the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+    /**
+     * Specifies the Encryption At Rest Options.
+     */
+    EncryptionAtRestOptions?: EncryptionAtRestOptions;
+    /**
+     * Specifies Auto-Tune options.
+     */
+    AutoTuneOptions?: AutoTuneOptions;
+    /**
+     *  This flag, when set to True, specifies whether the UpdateElasticsearchDomain request should return the results of validation checks without actually applying the change. This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain. This will not actually perform the Update. 
+     */
+    DryRun?: DryRun;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
      * The status of the updated Elasticsearch domain. 
      */
     DomainConfig: ElasticsearchDomainConfig;
+    /**
+     * Contains result of DryRun. 
+     */
+    DryRunResults?: DryRunResults;
+  }
+  export interface UpdatePackageRequest {
+    /**
+     * Unique identifier for the package.
+     */
+    PackageID: PackageID;
+    PackageSource: PackageSource;
+    /**
+     * New description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * An info message for the new version which will be shown as part of GetPackageVersionHistoryResponse.
+     */
+    CommitMessage?: CommitMessage;
+  }
+  export interface UpdatePackageResponse {
+    /**
+     * Information about the package PackageDetails.
+     */
+    PackageDetails?: PackageDetails;
   }
   export type UpdateTimestamp = Date;
   export interface UpgradeElasticsearchDomainRequest {
@@ -1881,6 +2399,7 @@ declare namespace ES {
      *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
      */
     PerformCheckOnly?: Boolean;
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface UpgradeHistory {
     /**

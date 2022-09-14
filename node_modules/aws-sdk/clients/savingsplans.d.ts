@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class SavingsPlans extends Service {
   /**
@@ -19,6 +19,14 @@ declare class SavingsPlans extends Service {
    * Creates a Savings Plan.
    */
   createSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.CreateSavingsPlanResponse) => void): Request<SavingsPlans.Types.CreateSavingsPlanResponse, AWSError>;
+  /**
+   * Deletes the queued purchase for the specified Savings Plan.
+   */
+  deleteQueuedSavingsPlan(params: SavingsPlans.Types.DeleteQueuedSavingsPlanRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DeleteQueuedSavingsPlanResponse) => void): Request<SavingsPlans.Types.DeleteQueuedSavingsPlanResponse, AWSError>;
+  /**
+   * Deletes the queued purchase for the specified Savings Plan.
+   */
+  deleteQueuedSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.DeleteQueuedSavingsPlanResponse) => void): Request<SavingsPlans.Types.DeleteQueuedSavingsPlanResponse, AWSError>;
   /**
    * Describes the specified Savings Plans rates.
    */
@@ -85,13 +93,17 @@ declare namespace SavingsPlans {
      */
     savingsPlanOfferingId: SavingsPlanOfferingId;
     /**
-     * The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more than three digits after the decimal point.
+     * The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more than five digits after the decimal point.
      */
     commitment: Amount;
     /**
      * The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is Partial Upfront.
      */
     upfrontPaymentAmount?: Amount;
+    /**
+     * The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+     */
+    purchaseTime?: DateTime;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
@@ -109,6 +121,15 @@ declare namespace SavingsPlans {
   }
   export type CurrencyCode = "CNY"|"USD"|string;
   export type CurrencyList = CurrencyCode[];
+  export type DateTime = Date;
+  export interface DeleteQueuedSavingsPlanRequest {
+    /**
+     * The ID of the Savings Plan.
+     */
+    savingsPlanId: SavingsPlanId;
+  }
+  export interface DeleteQueuedSavingsPlanResponse {
+  }
   export interface DescribeSavingsPlanRatesRequest {
     /**
      * The ID of the Savings Plan.
@@ -565,7 +586,7 @@ declare namespace SavingsPlans {
   export type SavingsPlanOperationList = SavingsPlanOperation[];
   export type SavingsPlanPaymentOption = "All Upfront"|"Partial Upfront"|"No Upfront"|string;
   export type SavingsPlanPaymentOptionList = SavingsPlanPaymentOption[];
-  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|string;
+  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|"SageMaker"|string;
   export type SavingsPlanProductTypeList = SavingsPlanProductType[];
   export interface SavingsPlanRate {
     /**
@@ -630,16 +651,16 @@ declare namespace SavingsPlans {
   }
   export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AWSLambda"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|"AmazonSageMaker"|string;
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
   export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
   export type SavingsPlanRateUsageType = string;
   export type SavingsPlanRateUsageTypeList = SavingsPlanRateUsageType[];
   export type SavingsPlanServiceCode = string;
   export type SavingsPlanServiceCodeList = SavingsPlanServiceCode[];
-  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|string;
+  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string;
   export type SavingsPlanStateList = SavingsPlanState[];
-  export type SavingsPlanType = "Compute"|"EC2Instance"|string;
+  export type SavingsPlanType = "Compute"|"EC2Instance"|"SageMaker"|string;
   export type SavingsPlanTypeList = SavingsPlanType[];
   export type SavingsPlanUsageType = string;
   export type SavingsPlanUsageTypeList = SavingsPlanUsageType[];

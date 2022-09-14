@@ -6,6 +6,24 @@
       "limit_key": "MaxResults",
       "result_key": "GlobalNetworks"
     },
+    "GetConnectPeerAssociations": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ConnectPeerAssociations"
+    },
+    "GetConnections": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Connections"
+    },
+    "GetCoreNetworkChangeSet": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "CoreNetworkChanges"
+    },
     "GetCustomerGatewayAssociations": {
       "input_token": "NextToken",
       "output_token": "NextToken",
@@ -30,17 +48,71 @@
       "limit_key": "MaxResults",
       "result_key": "Links"
     },
+    "GetNetworkResourceCounts": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "NetworkResourceCounts"
+    },
+    "GetNetworkResourceRelationships": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Relationships"
+    },
+    "GetNetworkResources": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "NetworkResources"
+    },
+    "GetNetworkTelemetry": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "NetworkTelemetry"
+    },
     "GetSites": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "Sites"
     },
+    "GetTransitGatewayConnectPeerAssociations": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "TransitGatewayConnectPeerAssociations"
+    },
     "GetTransitGatewayRegistrations": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "TransitGatewayRegistrations"
+    },
+    "ListAttachments": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Attachments"
+    },
+    "ListConnectPeers": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ConnectPeers"
+    },
+    "ListCoreNetworkPolicyVersions": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "CoreNetworkPolicyVersions"
+    },
+    "ListCoreNetworks": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "CoreNetworks"
     }
   }
 }

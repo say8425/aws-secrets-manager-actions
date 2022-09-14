@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class MTurk extends Service {
   /**
@@ -116,11 +116,11 @@ declare class MTurk extends Service {
    */
   disassociateQualificationFromWorker(callback?: (err: AWSError, data: MTurk.Types.DisassociateQualificationFromWorkerResponse) => void): Request<MTurk.Types.DisassociateQualificationFromWorkerResponse, AWSError>;
   /**
-   * The GetAccountBalance operation retrieves the amount of money in your Amazon Mechanical Turk account.
+   * The GetAccountBalance operation retrieves the Prepaid HITs balance in your Amazon Mechanical Turk account if you are a Prepaid Requester. Alternatively, this operation will retrieve the remaining available AWS Billing usage if you have enabled AWS Billing. Note: If you have enabled AWS Billing and still have a remaining Prepaid HITs balance, this balance can be viewed on the My Account page in the Requester console.
    */
   getAccountBalance(params: MTurk.Types.GetAccountBalanceRequest, callback?: (err: AWSError, data: MTurk.Types.GetAccountBalanceResponse) => void): Request<MTurk.Types.GetAccountBalanceResponse, AWSError>;
   /**
-   * The GetAccountBalance operation retrieves the amount of money in your Amazon Mechanical Turk account.
+   * The GetAccountBalance operation retrieves the Prepaid HITs balance in your Amazon Mechanical Turk account if you are a Prepaid Requester. Alternatively, this operation will retrieve the remaining available AWS Billing usage if you have enabled AWS Billing. Note: If you have enabled AWS Billing and still have a remaining Prepaid HITs balance, this balance can be viewed on the My Account page in the Requester console.
    */
   getAccountBalance(callback?: (err: AWSError, data: MTurk.Types.GetAccountBalanceResponse) => void): Request<MTurk.Types.GetAccountBalanceResponse, AWSError>;
   /**

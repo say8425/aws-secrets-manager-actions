@@ -52,6 +52,9 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
    *  the document client to convert empty values (0-length strings, binary
    *  buffers, and sets) to be converted to NULL types when persisting to
    *  DynamoDB.
+   * @option options wrapNumbers [Boolean] Set to true to return numbers as a
+   *  NumberValue object instead of converting them to native JavaScript numbers.
+   *  This allows for the safe round-trip transport of numbers of arbitrary size.
    * @see AWS.DynamoDB.constructor
    *
    */
@@ -392,7 +395,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
   /**
-   * Synchronous write operation that groups up to 10 action requests
+   * Synchronous write operation that groups up to 25 action requests.
    *
    * Supply the same parameters as {AWS.DynamoDB.transactWriteItems} with
    * `AttributeValue`s substituted by native JavaScript types.

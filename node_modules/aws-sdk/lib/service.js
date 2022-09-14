@@ -4,6 +4,7 @@ var regionConfig = require('./region_config');
 
 var inherit = AWS.util.inherit;
 var clientCount = 0;
+var region_utils = require('./region/utils');
 
 /**
  * The service class representing an AWS service.
@@ -25,6 +26,24 @@ AWS.Service = inherit({
       throw AWS.util.error(new Error(),
         'Service must be constructed with `new\' operator');
     }
+
+    if (config) {
+      if (config.region) {
+        var region = config.region;
+        if (region_utils.isFipsRegion(region)) {
+          config.region = region_utils.getRealRegion(region);
+          config.useFipsEndpoint = true;
+        }
+        if (region_utils.isGlobalRegion(region)) {
+          config.region = region_utils.getRealRegion(region);
+        }
+      }
+      if (typeof config.useDualstack === 'boolean'
+        && typeof config.useDualstackEndpoint !== 'boolean') {
+        config.useDualstackEndpoint = config.useDualstack;
+      }
+    }
+
     var ServiceClass = this.loadServiceClass(config || {});
     if (ServiceClass) {
       var originalConfig = AWS.util.copy(config);
@@ -452,6 +471,14 @@ AWS.Service = inherit({
    * @method_abstract This is an abstract method.
    */
   setupRequestListeners: function setupRequestListeners(request) {
+  },
+
+  /**
+   * Gets the signing name for a given request
+   * @api private
+   */
+  getSigningName: function getSigningName() {
+    return this.api.signingName || this.api.endpointPrefix;
   },
 
   /**

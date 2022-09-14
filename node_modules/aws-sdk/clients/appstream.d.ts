@@ -4,7 +4,7 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class AppStream extends Service {
   /**
@@ -12,6 +12,22 @@ declare class AppStream extends Service {
    */
   constructor(options?: AppStream.Types.ClientConfiguration)
   config: Config & AppStream.Types.ClientConfiguration;
+  /**
+   * Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
+   */
+  associateApplicationFleet(params: AppStream.Types.AssociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
+  /**
+   * Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
+   */
+  associateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
+  /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(params: AppStream.Types.AssociateApplicationToEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
+  /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
   /**
    * Associates the specified fleet with the specified stack.
    */
@@ -45,6 +61,22 @@ declare class AppStream extends Service {
    */
   copyImage(callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
   /**
+   * Creates an app block. App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block. This is only supported for Elastic fleets.
+   */
+  createAppBlock(params: AppStream.Types.CreateAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockResult) => void): Request<AppStream.Types.CreateAppBlockResult, AWSError>;
+  /**
+   * Creates an app block. App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block. This is only supported for Elastic fleets.
+   */
+  createAppBlock(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockResult) => void): Request<AppStream.Types.CreateAppBlockResult, AWSError>;
+  /**
+   * Creates an application. Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch.  This is only supported for Elastic fleets.
+   */
+  createApplication(params: AppStream.Types.CreateApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.CreateApplicationResult) => void): Request<AppStream.Types.CreateApplicationResult, AWSError>;
+  /**
+   * Creates an application. Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch.  This is only supported for Elastic fleets.
+   */
+  createApplication(callback?: (err: AWSError, data: AppStream.Types.CreateApplicationResult) => void): Request<AppStream.Types.CreateApplicationResult, AWSError>;
+  /**
    * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
@@ -53,11 +85,19 @@ declare class AppStream extends Service {
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a fleet. A fleet consists of streaming instances that run a specified image.
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(params: AppStream.Types.CreateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
+  /**
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
+  /**
+   * Creates a fleet. A fleet consists of streaming instances that run a specified image when using Always-On or On-Demand.
    */
   createFleet(params: AppStream.Types.CreateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
-   * Creates a fleet. A fleet consists of streaming instances that run a specified image.
+   * Creates a fleet. A fleet consists of streaming instances that run a specified image when using Always-On or On-Demand.
    */
   createFleet(callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
@@ -93,6 +133,14 @@ declare class AppStream extends Service {
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(params: AppStream.Types.CreateUpdatedImageRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
    * Creates a usage report subscription. Usage reports are generated daily.
    */
   createUsageReportSubscription(params: AppStream.Types.CreateUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
@@ -109,6 +157,22 @@ declare class AppStream extends Service {
    */
   createUser(callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
   /**
+   * Deletes an app block.
+   */
+  deleteAppBlock(params: AppStream.Types.DeleteAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockResult) => void): Request<AppStream.Types.DeleteAppBlockResult, AWSError>;
+  /**
+   * Deletes an app block.
+   */
+  deleteAppBlock(callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockResult) => void): Request<AppStream.Types.DeleteAppBlockResult, AWSError>;
+  /**
+   * Deletes an application.
+   */
+  deleteApplication(params: AppStream.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteApplicationResult) => void): Request<AppStream.Types.DeleteApplicationResult, AWSError>;
+  /**
+   * Deletes an application.
+   */
+  deleteApplication(callback?: (err: AWSError, data: AppStream.Types.DeleteApplicationResult) => void): Request<AppStream.Types.DeleteApplicationResult, AWSError>;
+  /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
   deleteDirectoryConfig(params: AppStream.Types.DeleteDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
@@ -116,6 +180,14 @@ declare class AppStream extends Service {
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
   deleteDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
+  /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(params: AppStream.Types.DeleteEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
   /**
    * Deletes the specified fleet.
    */
@@ -173,6 +245,30 @@ declare class AppStream extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
   /**
+   * Retrieves a list that describes one or more app blocks.
+   */
+  describeAppBlocks(params: AppStream.Types.DescribeAppBlocksRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlocksResult) => void): Request<AppStream.Types.DescribeAppBlocksResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app blocks.
+   */
+  describeAppBlocks(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlocksResult) => void): Request<AppStream.Types.DescribeAppBlocksResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.
+   */
+  describeApplicationFleetAssociations(params: AppStream.Types.DescribeApplicationFleetAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationFleetAssociationsResult) => void): Request<AppStream.Types.DescribeApplicationFleetAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.
+   */
+  describeApplicationFleetAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationFleetAssociationsResult) => void): Request<AppStream.Types.DescribeApplicationFleetAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more applications.
+   */
+  describeApplications(params: AppStream.Types.DescribeApplicationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationsResult) => void): Request<AppStream.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more applications.
+   */
+  describeApplications(callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationsResult) => void): Request<AppStream.Types.DescribeApplicationsResult, AWSError>;
+  /**
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
@@ -180,6 +276,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(params: AppStream.Types.DescribeEntitlementsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
    */
@@ -261,6 +365,22 @@ declare class AppStream extends Service {
    */
   disableUser(callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
   /**
+   * Disassociates the specified application from the fleet.
+   */
+  disassociateApplicationFleet(params: AppStream.Types.DisassociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
+  /**
+   * Disassociates the specified application from the fleet.
+   */
+  disassociateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
+  /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(params: AppStream.Types.DisassociateApplicationFromEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
+  /**
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
@@ -300,6 +420,14 @@ declare class AppStream extends Service {
    * Retrieves the name of the stack with which the specified fleet is associated.
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
+  /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(params: AppStream.Types.ListEntitledApplicationsRequest, callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
+  /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
   /**
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
@@ -357,6 +485,14 @@ declare class AppStream extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the specified application.
+   */
+  updateApplication(params: AppStream.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateApplicationResult) => void): Request<AppStream.Types.UpdateApplicationResult, AWSError>;
+  /**
+   * Updates the specified application.
+   */
+  updateApplication(callback?: (err: AWSError, data: AppStream.Types.UpdateApplicationResult) => void): Request<AppStream.Types.UpdateApplicationResult, AWSError>;
+  /**
    * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
@@ -365,11 +501,19 @@ declare class AppStream extends Service {
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(params: AppStream.Types.UpdateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
+  /**
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
+  /**
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -420,7 +564,39 @@ declare namespace AppStream {
   export type AccessEndpointType = "STREAMING"|string;
   export type AccountName = string;
   export type AccountPassword = string;
-  export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|string;
+  export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|"DOMAIN_PASSWORD_SIGNIN"|"DOMAIN_SMART_CARD_SIGNIN"|string;
+  export interface AppBlock {
+    /**
+     * The name of the app block.
+     */
+    Name: String;
+    /**
+     * The ARN of the app block.
+     */
+    Arn: Arn;
+    /**
+     * The description of the app block.
+     */
+    Description?: String;
+    /**
+     * The display name of the app block.
+     */
+    DisplayName?: String;
+    /**
+     * The source S3 location of the app block.
+     */
+    SourceS3Location?: S3Location;
+    /**
+     * The setup script details of the app block.
+     */
+    SetupScriptDetails: ScriptDetails;
+    /**
+     * The created time of the app block.
+     */
+    CreatedTime?: Timestamp;
+  }
+  export type AppBlocks = AppBlock[];
+  export type AppVisibility = "ALL"|"ASSOCIATED"|string;
   export interface Application {
     /**
      * The name of the application.
@@ -450,7 +626,52 @@ declare namespace AppStream {
      * Additional attributes that describe the application.
      */
     Metadata?: Metadata;
+    /**
+     * The working directory for the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The description of the application.
+     */
+    Description?: String;
+    /**
+     * The ARN of the application.
+     */
+    Arn?: Arn;
+    /**
+     * The app block ARN of the application.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The S3 location of the application icon.
+     */
+    IconS3Location?: S3Location;
+    /**
+     * The platforms on which the application can run.
+     */
+    Platforms?: Platforms;
+    /**
+     * The instance families for the application.
+     */
+    InstanceFamilies?: StringList;
+    /**
+     * The time at which the application was created within the app block.
+     */
+    CreatedTime?: Timestamp;
   }
+  export type ApplicationAttribute = "LAUNCH_PARAMETERS"|"WORKING_DIRECTORY"|string;
+  export type ApplicationAttributes = ApplicationAttribute[];
+  export interface ApplicationFleetAssociation {
+    /**
+     * The name of the fleet associated with the application.
+     */
+    FleetName: String;
+    /**
+     * The ARN of the application associated with the fleet.
+     */
+    ApplicationArn: Arn;
+  }
+  export type ApplicationFleetAssociationList = ApplicationFleetAssociation[];
   export interface ApplicationSettings {
     /**
      * Enables or disables persistent application settings for users during their streaming sessions. 
@@ -479,6 +700,38 @@ declare namespace AppStream {
   export type AppstreamAgentVersion = string;
   export type Arn = string;
   export type ArnList = Arn[];
+  export interface AssociateApplicationFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn: Arn;
+  }
+  export interface AssociateApplicationFleetResult {
+    /**
+     * If fleet name is specified, this returns the list of applications that are associated to it. If application ARN is specified, this returns the list of fleets to which it is associated.
+     */
+    ApplicationFleetAssociation?: ApplicationFleetAssociation;
+  }
+  export interface AssociateApplicationToEntitlementRequest {
+    /**
+     * The name of the stack.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface AssociateApplicationToEntitlementResult {
+  }
   export interface AssociateFleetRequest {
     /**
      * The name of the fleet. 
@@ -568,6 +821,87 @@ declare namespace AppStream {
      */
     DestinationImageName?: Name;
   }
+  export interface CreateAppBlockRequest {
+    /**
+     * The name of the app block.
+     */
+    Name: Name;
+    /**
+     * The description of the app block.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block. This is not displayed to the user.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The source S3 location of the app block.
+     */
+    SourceS3Location: S3Location;
+    /**
+     * The setup script details of the app block.
+     */
+    SetupScriptDetails: ScriptDetails;
+    /**
+     * The tags assigned to the app block.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateAppBlockResult {
+    /**
+     * The app block.
+     */
+    AppBlock?: AppBlock;
+  }
+  export interface CreateApplicationRequest {
+    /**
+     * The name of the application. This name is visible to users when display name is not specified.
+     */
+    Name: Name;
+    /**
+     * The display name of the application. This name is visible to users in the application catalog.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The description of the application.
+     */
+    Description?: Description;
+    /**
+     * The location in S3 of the application icon.
+     */
+    IconS3Location: S3Location;
+    /**
+     * The launch path of the application.
+     */
+    LaunchPath: String;
+    /**
+     * The working directory of the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The launch parameters of the application.
+     */
+    LaunchParameters?: String;
+    /**
+     * The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.
+     */
+    Platforms: Platforms;
+    /**
+     * The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.
+     */
+    InstanceFamilies: StringList;
+    /**
+     * The app block ARN to which the application should be associated
+     */
+    AppBlockArn: Arn;
+    /**
+     * The tags assigned to the application.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateApplicationResult {
+    Application?: Application;
+  }
   export interface CreateDirectoryConfigRequest {
     /**
      * The fully qualified name of the directory (for example, corp.example.com).
@@ -580,13 +914,41 @@ declare namespace AppStream {
     /**
      * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
-    ServiceAccountCredentials: ServiceAccountCredentials;
+    ServiceAccountCredentials?: ServiceAccountCredentials;
   }
   export interface CreateDirectoryConfigResult {
     /**
      * Information about the directory configuration.
      */
     DirectoryConfig?: DirectoryConfig;
+  }
+  export interface CreateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+  }
+  export interface CreateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
   }
   export interface CreateFleetRequest {
     /**
@@ -602,7 +964,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium  
      */
     InstanceType: String;
     /**
@@ -610,11 +972,11 @@ declare namespace AppStream {
      */
     FleetType?: FleetType;
     /**
-     * The desired capacity for the fleet.
+     * The desired capacity for the fleet. This is not allowed for Elastic fleets. For Elastic fleets, specify MaxConcurrentSessions instead.
      */
-    ComputeCapacity: ComputeCapacity;
+    ComputeCapacity?: ComputeCapacity;
     /**
-     * The VPC configuration for the fleet.
+     * The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones.
      */
     VpcConfig?: VpcConfig;
     /**
@@ -638,7 +1000,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. This is not allowed for Elastic fleets. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
@@ -650,9 +1012,25 @@ declare namespace AppStream {
      */
     IdleDisconnectTimeoutInSeconds?: Integer;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
      */
     IamRoleArn?: Arn;
+    /**
+     * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
+     */
+    StreamView?: StreamView;
+    /**
+     * The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. 
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum concurrent sessions of the Elastic fleet. This is required for Elastic fleets, and not allowed for other fleet types.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
   }
   export interface CreateFleetResult {
     /**
@@ -674,7 +1052,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching the image builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
@@ -690,7 +1068,7 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
      */
     IamRoleArn?: Arn;
     /**
@@ -782,7 +1160,7 @@ declare namespace AppStream {
      */
     AccessEndpoints?: AccessEndpointList;
     /**
-     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
   }
@@ -806,7 +1184,7 @@ declare namespace AppStream {
      */
     UserId: StreamingUrlUserId;
     /**
-     * The name of the application to launch after the session starts. This is the name that you specified as Name in the Image Assistant.
+     * The name of the application to launch after the session starts. This is the name that you specified as Name in the Image Assistant. If your fleet is enabled for the Desktop stream view, you can also choose to launch directly to the operating system desktop. To do so, specify Desktop.
      */
     ApplicationId?: String;
     /**
@@ -827,6 +1205,39 @@ declare namespace AppStream {
      * The elapsed time, in seconds after the Unix epoch, when this URL expires.
      */
     Expires?: Timestamp;
+  }
+  export interface CreateUpdatedImageRequest {
+    /**
+     * The name of the image to update.
+     */
+    existingImageName: Name;
+    /**
+     * The name of the new image. The name must be unique within the AWS account and Region.
+     */
+    newImageName: Name;
+    /**
+     * The description to display for the new image.
+     */
+    newImageDescription?: Description;
+    /**
+     * The name to display for the new image.
+     */
+    newImageDisplayName?: DisplayName;
+    /**
+     * The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    newImageTags?: Tags;
+    /**
+     * Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to true, AppStream 2.0 displays whether image updates are available. If this value is set to false, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.
+     */
+    dryRun?: Boolean;
+  }
+  export interface CreateUpdatedImageResult {
+    image?: Image;
+    /**
+     * Indicates whether a new image can be created.
+     */
+    canUpdateImage?: Boolean;
   }
   export interface CreateUsageReportSubscriptionRequest {
   }
@@ -864,6 +1275,22 @@ declare namespace AppStream {
   }
   export interface CreateUserResult {
   }
+  export interface DeleteAppBlockRequest {
+    /**
+     * The name of the app block.
+     */
+    Name: Name;
+  }
+  export interface DeleteAppBlockResult {
+  }
+  export interface DeleteApplicationRequest {
+    /**
+     * The name of the application.
+     */
+    Name: Name;
+  }
+  export interface DeleteApplicationResult {
+  }
   export interface DeleteDirectoryConfigRequest {
     /**
      * The name of the directory configuration.
@@ -871,6 +1298,18 @@ declare namespace AppStream {
     DirectoryName: DirectoryName;
   }
   export interface DeleteDirectoryConfigResult {
+  }
+  export interface DeleteEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+  }
+  export interface DeleteEntitlementResult {
   }
   export interface DeleteFleetRequest {
     /**
@@ -940,6 +1379,82 @@ declare namespace AppStream {
   }
   export interface DeleteUserResult {
   }
+  export interface DescribeAppBlocksRequest {
+    /**
+     * The ARNs of the app blocks.
+     */
+    Arns?: ArnList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeAppBlocksResult {
+    /**
+     * The app blocks in the list.
+     */
+    AppBlocks?: AppBlocks;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationFleetAssociationsRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName?: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn?: Arn;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationFleetAssociationsResult {
+    /**
+     * The application fleet associations in the list.
+     */
+    ApplicationFleetAssociations?: ApplicationFleetAssociationList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationsRequest {
+    /**
+     * The ARNs for the applications.
+     */
+    Arns?: ArnList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeApplicationsResult {
+    /**
+     * The applications in the list.
+     */
+    Applications?: Applications;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
   export interface DescribeDirectoryConfigsRequest {
     /**
      * The directory names.
@@ -961,6 +1476,34 @@ declare namespace AppStream {
     DirectoryConfigs?: DirectoryConfigList;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeEntitlementsRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name?: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeEntitlementsResult {
+    /**
+     * The entitlements.
+     */
+    Entitlements?: EntitlementList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
      */
     NextToken?: String;
   }
@@ -1083,7 +1626,7 @@ declare namespace AppStream {
      */
     FleetName: String;
     /**
-     * The user identifier.
+     * The user identifier (ID). If you specify a user ID, you must also specify the authentication type.
      */
     UserId?: UserId;
     /**
@@ -1239,6 +1782,34 @@ declare namespace AppStream {
   }
   export interface DisableUserResult {
   }
+  export interface DisassociateApplicationFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn: Arn;
+  }
+  export interface DisassociateApplicationFleetResult {
+  }
+  export interface DisassociateApplicationFromEntitlementRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application to remove from the entitlement.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface DisassociateApplicationFromEntitlementResult {
+  }
   export interface DisassociateFleetRequest {
     /**
      * The name of the fleet.
@@ -1278,6 +1849,55 @@ declare namespace AppStream {
   }
   export interface EnableUserResult {
   }
+  export interface EntitledApplication {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export type EntitledApplicationList = EntitledApplication[];
+  export interface Entitlement {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+    /**
+     * The time when the entitlement was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time when the entitlement was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface EntitlementAttribute {
+    /**
+     * A supported AWS IAM SAML PrincipalTag attribute that is matched to the associated value when a user identity federates into an Amazon AppStream 2.0 SAML application. The following are valid values:   roles   department    organization    groups    title    costCenter    userType    
+     */
+    Name: String;
+    /**
+     * A value that is matched to a supported SAML attribute name when a user identity federates into an Amazon AppStream 2.0 SAML application. 
+     */
+    Value: String;
+  }
+  export type EntitlementAttributeList = EntitlementAttribute[];
+  export type EntitlementList = Entitlement[];
   export interface ExpireSessionRequest {
     /**
      * The identifier of the streaming session.
@@ -1313,7 +1933,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
@@ -1361,11 +1981,27 @@ declare namespace AppStream {
      */
     IdleDisconnectTimeoutInSeconds?: Integer;
     /**
-     * The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     * The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
      */
     IamRoleArn?: Arn;
+    /**
+     * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
+     */
+    StreamView?: StreamView;
+    /**
+     * The platform of the fleet.
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum number of concurrent sessions for the fleet.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings associated with the fleet.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
   }
-  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|string;
+  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|"USB_DEVICE_FILTER_STRINGS"|string;
   export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
@@ -1377,11 +2013,11 @@ declare namespace AppStream {
      */
     ErrorMessage?: String;
   }
-  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
+  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"FLEET_STOPPED"|"FLEET_INSTANCE_PROVISIONING_FAILURE"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
   export type FleetErrors = FleetError[];
   export type FleetList = Fleet[];
   export type FleetState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
-  export type FleetType = "ALWAYS_ON"|"ON_DEMAND"|string;
+  export type FleetType = "ALWAYS_ON"|"ON_DEMAND"|"ELASTIC"|string;
   export interface Image {
     /**
      * The name of the image.
@@ -1447,6 +2083,10 @@ declare namespace AppStream {
      * The permissions to provide to the destination AWS account for the specified image.
      */
     ImagePermissions?: ImagePermissions;
+    /**
+     * Describes the errors that are returned when a new image can't be created.
+     */
+    ImageErrors?: ResourceErrors;
   }
   export interface ImageBuilder {
     /**
@@ -1474,7 +2114,7 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The instance type for the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type for the image builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType?: String;
     /**
@@ -1482,7 +2122,7 @@ declare namespace AppStream {
      */
     Platform?: PlatformType;
     /**
-     * The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     * The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
      */
     IamRoleArn?: Arn;
     /**
@@ -1520,7 +2160,7 @@ declare namespace AppStream {
     AccessEndpoints?: AccessEndpointList;
   }
   export type ImageBuilderList = ImageBuilder[];
-  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
+  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|"UPDATING"|"PENDING_QUALIFICATION"|string;
   export interface ImageBuilderStateChangeReason {
     /**
      * The state change reason code.
@@ -1543,7 +2183,7 @@ declare namespace AppStream {
      */
     allowImageBuilder?: BooleanObject;
   }
-  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|string;
+  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|"CREATING"|"IMPORTING"|string;
   export interface ImageStateChangeReason {
     /**
      * The state change reason code.
@@ -1607,6 +2247,34 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface ListEntitledApplicationsRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface ListEntitledApplicationsResult {
+    /**
+     * The entitled applications.
+     */
+    EntitledApplications?: EntitledApplicationList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -1637,7 +2305,8 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type Permission = "ENABLED"|"DISABLED"|string;
-  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|string;
+  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"AMAZON_LINUX2"|string;
+  export type Platforms = PlatformType[];
   export type RedirectURL = string;
   export type RegionName = string;
   export interface ResourceError {
@@ -1656,6 +2325,36 @@ declare namespace AppStream {
   }
   export type ResourceErrors = ResourceError[];
   export type ResourceIdentifier = string;
+  export type S3Bucket = string;
+  export type S3Key = string;
+  export interface S3Location {
+    /**
+     * The S3 bucket of the S3 object.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The S3 key of the S3 object.
+     */
+    S3Key: S3Key;
+  }
+  export interface ScriptDetails {
+    /**
+     * The S3 object location for the script.
+     */
+    ScriptS3Location: S3Location;
+    /**
+     * The run path for the script.
+     */
+    ExecutablePath: String;
+    /**
+     * The runtime parameters passed to the run path for the script.
+     */
+    ExecutableParameters?: String;
+    /**
+     * The run timeout, in seconds, for the script.
+     */
+    TimeoutInSeconds: Integer;
+  }
   export type SecurityGroupIdList = String[];
   export interface ServiceAccountCredentials {
     /**
@@ -1853,6 +2552,7 @@ declare namespace AppStream {
   }
   export type StorageConnectorList = StorageConnector[];
   export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|"ONE_DRIVE"|string;
+  export type StreamView = "APP"|"DESKTOP"|string;
   export type StreamingUrlUserId = string;
   export type String = string;
   export type StringList = String[];
@@ -1886,6 +2586,47 @@ declare namespace AppStream {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateApplicationRequest {
+    /**
+     * The name of the application. This name is visible to users when display name is not specified.
+     */
+    Name: Name;
+    /**
+     * The display name of the application. This name is visible to users in the application catalog.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The description of the application.
+     */
+    Description?: Description;
+    /**
+     * The icon S3 location of the application.
+     */
+    IconS3Location?: S3Location;
+    /**
+     * The launch path of the application.
+     */
+    LaunchPath?: String;
+    /**
+     * The working directory of the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The launch parameters of the application.
+     */
+    LaunchParameters?: String;
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The attributes to delete for an application.
+     */
+    AttributesToDelete?: ApplicationAttributes;
+  }
+  export interface UpdateApplicationResult {
+    Application?: Application;
+  }
   export interface UpdateDirectoryConfigRequest {
     /**
      * The name of the Directory Config object.
@@ -1906,6 +2647,34 @@ declare namespace AppStream {
      */
     DirectoryConfig?: DirectoryConfig;
   }
+  export interface UpdateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or only selected apps are entitled.
+     */
+    AppVisibility?: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes?: EntitlementAttributeList;
+  }
+  export interface UpdateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
+  }
   export interface UpdateFleetRequest {
     /**
      * The name of the image used to create the fleet.
@@ -1920,15 +2689,15 @@ declare namespace AppStream {
      */
     Name?: String;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium  
      */
     InstanceType?: String;
     /**
-     * The desired capacity for the fleet.
+     * The desired capacity for the fleet. This is not allowed for Elastic fleets.
      */
     ComputeCapacity?: ComputeCapacity;
     /**
-     * The VPC configuration for the fleet.
+     * The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. 
      */
     VpcConfig?: VpcConfig;
     /**
@@ -1968,9 +2737,25 @@ declare namespace AppStream {
      */
     AttributesToDelete?: FleetAttributes;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
      */
     IamRoleArn?: Arn;
+    /**
+     * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
+     */
+    StreamView?: StreamView;
+    /**
+     * The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. 
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum number of concurrent sessions for a fleet.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
   }
   export interface UpdateFleetResult {
     /**
@@ -2040,7 +2825,7 @@ declare namespace AppStream {
      */
     AccessEndpoints?: AccessEndpointList;
     /**
-     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
   }
@@ -2071,6 +2856,8 @@ declare namespace AppStream {
     SubscriptionErrors?: LastReportGenerationExecutionErrors;
   }
   export type UsageReportSubscriptionList = UsageReportSubscription[];
+  export type UsbDeviceFilterString = string;
+  export type UsbDeviceFilterStrings = UsbDeviceFilterString[];
   export interface User {
     /**
      * The ARN of the user.
@@ -2151,7 +2938,7 @@ declare namespace AppStream {
      */
     ErrorMessage?: String;
   }
-  export type UserStackAssociationErrorCode = "STACK_NOT_FOUND"|"USER_NAME_NOT_FOUND"|"INTERNAL_ERROR"|string;
+  export type UserStackAssociationErrorCode = "STACK_NOT_FOUND"|"USER_NAME_NOT_FOUND"|"DIRECTORY_NOT_FOUND"|"INTERNAL_ERROR"|string;
   export type UserStackAssociationErrorList = UserStackAssociationError[];
   export type UserStackAssociationList = UserStackAssociation[];
   export type Username = string;

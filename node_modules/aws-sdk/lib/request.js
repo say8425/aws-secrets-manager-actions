@@ -313,12 +313,10 @@ AWS.Request = inherit({
     var region = service.config.region;
     var customUserAgent = service.config.customUserAgent;
 
-    if (service.isGlobalEndpoint) {
-      if (service.signingRegion) {
-        region = service.signingRegion;
-      } else {
-        region = 'us-east-1';
-      }
+    if (service.signingRegion) {
+      region = service.signingRegion;
+    } else if (service.isGlobalEndpoint) {
+      region = 'us-east-1';
     }
 
     this.domain = domain && domain.active;
@@ -785,7 +783,7 @@ AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) 
         if (resp.error) {
           reject(resp.error);
         } else {
-          // define $response property so that it is not enumberable
+          // define $response property so that it is not enumerable
           // this prevents circular reference errors when stringifying the JSON object
           resolve(Object.defineProperty(
             resp.data || {},

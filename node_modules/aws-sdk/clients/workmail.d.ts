@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class WorkMail extends Service {
   /**
@@ -28,6 +28,14 @@ declare class WorkMail extends Service {
    */
   associateMemberToGroup(callback?: (err: AWSError, data: WorkMail.Types.AssociateMemberToGroupResponse) => void): Request<WorkMail.Types.AssociateMemberToGroupResponse, AWSError>;
   /**
+   * Cancels a mailbox export job.  If the mailbox export job is near completion, it might not be possible to cancel it. 
+   */
+  cancelMailboxExportJob(params: WorkMail.Types.CancelMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.CancelMailboxExportJobResponse) => void): Request<WorkMail.Types.CancelMailboxExportJobResponse, AWSError>;
+  /**
+   * Cancels a mailbox export job.  If the mailbox export job is near completion, it might not be possible to cancel it. 
+   */
+  cancelMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.CancelMailboxExportJobResponse) => void): Request<WorkMail.Types.CancelMailboxExportJobResponse, AWSError>;
+  /**
    * Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
    */
   createAlias(params: WorkMail.Types.CreateAliasRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateAliasResponse) => void): Request<WorkMail.Types.CreateAliasResponse, AWSError>;
@@ -43,6 +51,22 @@ declare class WorkMail extends Service {
    * Creates a group that can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
   createGroup(callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
+  /**
+   * Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  createMobileDeviceAccessRule(params: WorkMail.Types.CreateMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.CreateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  createMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.CreateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.CreateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see Adding an organization in the Amazon WorkMail Administrator Guide. You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see Adding a domain and Choosing the default domain in the Amazon WorkMail Administrator Guide. Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
+   */
+  createOrganization(params: WorkMail.Types.CreateOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateOrganizationResponse) => void): Request<WorkMail.Types.CreateOrganizationResponse, AWSError>;
+  /**
+   * Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see Adding an organization in the Amazon WorkMail Administrator Guide. You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see Adding a domain and Choosing the default domain in the Amazon WorkMail Administrator Guide. Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
+   */
+  createOrganization(callback?: (err: AWSError, data: WorkMail.Types.CreateOrganizationResponse) => void): Request<WorkMail.Types.CreateOrganizationResponse, AWSError>;
   /**
    * Creates a new Amazon WorkMail resource. 
    */
@@ -60,11 +84,11 @@ declare class WorkMail extends Service {
    */
   createUser(callback?: (err: AWSError, data: WorkMail.Types.CreateUserResponse) => void): Request<WorkMail.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes an access control rule for the specified WorkMail organization.
+   * Deletes an access control rule for the specified WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteAccessControlRule(params: WorkMail.Types.DeleteAccessControlRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
   /**
-   * Deletes an access control rule for the specified WorkMail organization.
+   * Deletes an access control rule for the specified WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
   /**
@@ -75,6 +99,14 @@ declare class WorkMail extends Service {
    * Remove one or more specified aliases from a set of aliases for a given user.
    */
   deleteAlias(callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
+  /**
+   * Deletes the email monitoring configuration for a specified organization.
+   */
+  deleteEmailMonitoringConfiguration(params: WorkMail.Types.DeleteEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DeleteEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Deletes the email monitoring configuration for a specified organization.
+   */
+  deleteEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DeleteEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DeleteEmailMonitoringConfigurationResponse, AWSError>;
   /**
    * Deletes a group from Amazon WorkMail.
    */
@@ -91,6 +123,30 @@ declare class WorkMail extends Service {
    * Deletes permissions granted to a member (user or group).
    */
   deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  /**
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.  Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  deleteMobileDeviceAccessOverride(params: WorkMail.Types.DeleteMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.  Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  deleteMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  deleteMobileDeviceAccessRule(params: WorkMail.Types.DeleteMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  deleteMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see Removing an organization in the Amazon WorkMail Administrator Guide.
+   */
+  deleteOrganization(params: WorkMail.Types.DeleteOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteOrganizationResponse) => void): Request<WorkMail.Types.DeleteOrganizationResponse, AWSError>;
+  /**
+   * Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see Removing an organization in the Amazon WorkMail Administrator Guide.
+   */
+  deleteOrganization(callback?: (err: AWSError, data: WorkMail.Types.DeleteOrganizationResponse) => void): Request<WorkMail.Types.DeleteOrganizationResponse, AWSError>;
   /**
    * Deletes the specified resource. 
    */
@@ -124,6 +180,22 @@ declare class WorkMail extends Service {
    */
   deregisterFromWorkMail(callback?: (err: AWSError, data: WorkMail.Types.DeregisterFromWorkMailResponse) => void): Request<WorkMail.Types.DeregisterFromWorkMailResponse, AWSError>;
   /**
+   * Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.
+   */
+  deregisterMailDomain(params: WorkMail.Types.DeregisterMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.DeregisterMailDomainResponse) => void): Request<WorkMail.Types.DeregisterMailDomainResponse, AWSError>;
+  /**
+   * Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.
+   */
+  deregisterMailDomain(callback?: (err: AWSError, data: WorkMail.Types.DeregisterMailDomainResponse) => void): Request<WorkMail.Types.DeregisterMailDomainResponse, AWSError>;
+  /**
+   * Describes the current email monitoring configuration for a specified organization.
+   */
+  describeEmailMonitoringConfiguration(params: WorkMail.Types.DescribeEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DescribeEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Describes the current email monitoring configuration for a specified organization.
+   */
+  describeEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DescribeEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DescribeEmailMonitoringConfigurationResponse, AWSError>;
+  /**
    * Returns the data available for the group.
    */
   describeGroup(params: WorkMail.Types.DescribeGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
@@ -131,6 +203,22 @@ declare class WorkMail extends Service {
    * Returns the data available for the group.
    */
   describeGroup(callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
+  /**
+   * Lists the settings in a DMARC policy for a specified organization.
+   */
+  describeInboundDmarcSettings(params: WorkMail.Types.DescribeInboundDmarcSettingsRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.DescribeInboundDmarcSettingsResponse, AWSError>;
+  /**
+   * Lists the settings in a DMARC policy for a specified organization.
+   */
+  describeInboundDmarcSettings(callback?: (err: AWSError, data: WorkMail.Types.DescribeInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.DescribeInboundDmarcSettingsResponse, AWSError>;
+  /**
+   * Describes the current status of a mailbox export job.
+   */
+  describeMailboxExportJob(params: WorkMail.Types.DescribeMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeMailboxExportJobResponse) => void): Request<WorkMail.Types.DescribeMailboxExportJobResponse, AWSError>;
+  /**
+   * Describes the current status of a mailbox export job.
+   */
+  describeMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.DescribeMailboxExportJobResponse) => void): Request<WorkMail.Types.DescribeMailboxExportJobResponse, AWSError>;
   /**
    * Provides more information regarding a given organization based on its identifier.
    */
@@ -188,6 +276,14 @@ declare class WorkMail extends Service {
    */
   getDefaultRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.GetDefaultRetentionPolicyResponse) => void): Request<WorkMail.Types.GetDefaultRetentionPolicyResponse, AWSError>;
   /**
+   * Gets details for a mail domain, including domain records required to configure your domain with recommended security.
+   */
+  getMailDomain(params: WorkMail.Types.GetMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailDomainResponse) => void): Request<WorkMail.Types.GetMailDomainResponse, AWSError>;
+  /**
+   * Gets details for a mail domain, including domain records required to configure your domain with recommended security.
+   */
+  getMailDomain(callback?: (err: AWSError, data: WorkMail.Types.GetMailDomainResponse) => void): Request<WorkMail.Types.GetMailDomainResponse, AWSError>;
+  /**
    * Requests a user's mailbox details for a specified organization and user.
    */
   getMailboxDetails(params: WorkMail.Types.GetMailboxDetailsRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
@@ -195,6 +291,22 @@ declare class WorkMail extends Service {
    * Requests a user's mailbox details for a specified organization and user.
    */
   getMailboxDetails(callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
+  /**
+   * Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+   */
+  getMobileDeviceAccessEffect(params: WorkMail.Types.GetMobileDeviceAccessEffectRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessEffectResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessEffectResponse, AWSError>;
+  /**
+   * Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+   */
+  getMobileDeviceAccessEffect(callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessEffectResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessEffectResponse, AWSError>;
+  /**
+   * Gets the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  getMobileDeviceAccessOverride(params: WorkMail.Types.GetMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Gets the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  getMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessOverrideResponse, AWSError>;
   /**
    * Lists the access control rules for the specified organization.
    */
@@ -228,6 +340,22 @@ declare class WorkMail extends Service {
    */
   listGroups(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
   /**
+   * Lists the mail domains in a given Amazon WorkMail organization.
+   */
+  listMailDomains(params: WorkMail.Types.ListMailDomainsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailDomainsResponse) => void): Request<WorkMail.Types.ListMailDomainsResponse, AWSError>;
+  /**
+   * Lists the mail domains in a given Amazon WorkMail organization.
+   */
+  listMailDomains(callback?: (err: AWSError, data: WorkMail.Types.ListMailDomainsResponse) => void): Request<WorkMail.Types.ListMailDomainsResponse, AWSError>;
+  /**
+   * Lists the mailbox export jobs started for the specified organization within the last seven days.
+   */
+  listMailboxExportJobs(params: WorkMail.Types.ListMailboxExportJobsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxExportJobsResponse) => void): Request<WorkMail.Types.ListMailboxExportJobsResponse, AWSError>;
+  /**
+   * Lists the mailbox export jobs started for the specified organization within the last seven days.
+   */
+  listMailboxExportJobs(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxExportJobsResponse) => void): Request<WorkMail.Types.ListMailboxExportJobsResponse, AWSError>;
+  /**
    * Lists the mailbox permissions associated with a user, group, or resource mailbox.
    */
   listMailboxPermissions(params: WorkMail.Types.ListMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
@@ -235,6 +363,22 @@ declare class WorkMail extends Service {
    * Lists the mailbox permissions associated with a user, group, or resource mailbox.
    */
   listMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  /**
+   * Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.
+   */
+  listMobileDeviceAccessOverrides(params: WorkMail.Types.ListMobileDeviceAccessOverridesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessOverridesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessOverridesResponse, AWSError>;
+  /**
+   * Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.
+   */
+  listMobileDeviceAccessOverrides(callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessOverridesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessOverridesResponse, AWSError>;
+  /**
+   * Lists the mobile device access rules for the specified Amazon WorkMail organization.
+   */
+  listMobileDeviceAccessRules(params: WorkMail.Types.ListMobileDeviceAccessRulesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessRulesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessRulesResponse, AWSError>;
+  /**
+   * Lists the mobile device access rules for the specified Amazon WorkMail organization.
+   */
+  listMobileDeviceAccessRules(callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessRulesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessRulesResponse, AWSError>;
   /**
    * Returns summaries of the customer's organizations.
    */
@@ -284,6 +428,22 @@ declare class WorkMail extends Service {
    */
   putAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.PutAccessControlRuleResponse) => void): Request<WorkMail.Types.PutAccessControlRuleResponse, AWSError>;
   /**
+   * Creates or updates the email monitoring configuration for a specified organization.
+   */
+  putEmailMonitoringConfiguration(params: WorkMail.Types.PutEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.PutEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.PutEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the email monitoring configuration for a specified organization.
+   */
+  putEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.PutEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.PutEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Enables or disables a DMARC policy for a given organization.
+   */
+  putInboundDmarcSettings(params: WorkMail.Types.PutInboundDmarcSettingsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.PutInboundDmarcSettingsResponse, AWSError>;
+  /**
+   * Enables or disables a DMARC policy for a given organization.
+   */
+  putInboundDmarcSettings(callback?: (err: AWSError, data: WorkMail.Types.PutInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.PutInboundDmarcSettingsResponse, AWSError>;
+  /**
    * Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
    */
   putMailboxPermissions(params: WorkMail.Types.PutMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
@@ -292,6 +452,14 @@ declare class WorkMail extends Service {
    */
   putMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
   /**
+   * Creates or updates a mobile device access override for the given WorkMail organization, user, and device.
+   */
+  putMobileDeviceAccessOverride(params: WorkMail.Types.PutMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.PutMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Creates or updates a mobile device access override for the given WorkMail organization, user, and device.
+   */
+  putMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.PutMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.PutMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
    * Puts a retention policy to the specified organization.
    */
   putRetentionPolicy(params: WorkMail.Types.PutRetentionPolicyRequest, callback?: (err: AWSError, data: WorkMail.Types.PutRetentionPolicyResponse) => void): Request<WorkMail.Types.PutRetentionPolicyResponse, AWSError>;
@@ -299,6 +467,14 @@ declare class WorkMail extends Service {
    * Puts a retention policy to the specified organization.
    */
   putRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.PutRetentionPolicyResponse) => void): Request<WorkMail.Types.PutRetentionPolicyResponse, AWSError>;
+  /**
+   * Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.
+   */
+  registerMailDomain(params: WorkMail.Types.RegisterMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.RegisterMailDomainResponse) => void): Request<WorkMail.Types.RegisterMailDomainResponse, AWSError>;
+  /**
+   * Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.
+   */
+  registerMailDomain(callback?: (err: AWSError, data: WorkMail.Types.RegisterMailDomainResponse) => void): Request<WorkMail.Types.RegisterMailDomainResponse, AWSError>;
   /**
    * Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable.  Users can either be created by calling the CreateUser API operation or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
@@ -316,6 +492,14 @@ declare class WorkMail extends Service {
    */
   resetPassword(callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
   /**
+   * Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Exporting mailbox content in the Amazon WorkMail Administrator Guide.
+   */
+  startMailboxExportJob(params: WorkMail.Types.StartMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.StartMailboxExportJobResponse) => void): Request<WorkMail.Types.StartMailboxExportJobResponse, AWSError>;
+  /**
+   * Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Exporting mailbox content in the Amazon WorkMail Administrator Guide.
+   */
+  startMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.StartMailboxExportJobResponse) => void): Request<WorkMail.Types.StartMailboxExportJobResponse, AWSError>;
+  /**
    * Applies the specified tags to the specified Amazon WorkMail organization resource.
    */
   tagResource(params: WorkMail.Types.TagResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.TagResourceResponse) => void): Request<WorkMail.Types.TagResourceResponse, AWSError>;
@@ -332,6 +516,14 @@ declare class WorkMail extends Service {
    */
   untagResource(callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
+   */
+  updateDefaultMailDomain(params: WorkMail.Types.UpdateDefaultMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateDefaultMailDomainResponse) => void): Request<WorkMail.Types.UpdateDefaultMailDomainResponse, AWSError>;
+  /**
+   * Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
+   */
+  updateDefaultMailDomain(callback?: (err: AWSError, data: WorkMail.Types.UpdateDefaultMailDomainResponse) => void): Request<WorkMail.Types.UpdateDefaultMailDomainResponse, AWSError>;
+  /**
    * Updates a user's current mailbox quota for a specified organization and user.
    */
   updateMailboxQuota(params: WorkMail.Types.UpdateMailboxQuotaRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
@@ -339,6 +531,14 @@ declare class WorkMail extends Service {
    * Updates a user's current mailbox quota for a specified organization and user.
    */
   updateMailboxQuota(callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
+  /**
+   * Updates a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  updateMobileDeviceAccessRule(params: WorkMail.Types.UpdateMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.UpdateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Updates a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  updateMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.UpdateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.UpdateMobileDeviceAccessRuleResponse, AWSError>;
   /**
    * Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
    */
@@ -459,6 +659,23 @@ declare namespace WorkMail {
     AutoDeclineConflictingRequests?: Boolean;
   }
   export type Boolean = boolean;
+  export type BooleanObject = boolean;
+  export interface CancelMailboxExportJobRequest {
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken: IdempotencyClientToken;
+    /**
+     * The job ID.
+     */
+    JobId: MailboxExportJobId;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface CancelMailboxExportJobResponse {
+  }
   export interface CreateAliasRequest {
     /**
      * The organization under which the member (user or group) exists.
@@ -491,6 +708,98 @@ declare namespace WorkMail {
      */
     GroupId?: WorkMailIdentifier;
   }
+  export interface CreateMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be created.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The rule name.
+     */
+    Name: MobileDeviceAccessRuleName;
+    /**
+     * The rule description.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that the rule will match.
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that the rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that the rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that the rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that the rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that the rule will not match. All other device operating systems will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device user agents that the rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * Device user agents that the rule will not match. All other device user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+  }
+  export interface CreateMobileDeviceAccessRuleResponse {
+    /**
+     * The identifier for the newly created mobile device access rule.
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+  }
+  export interface CreateOrganizationRequest {
+    /**
+     * The AWS Directory Service directory ID.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The organization alias.
+     */
+    Alias: OrganizationName;
+    /**
+     * The idempotency token associated with the request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The email domains to associate with the organization.
+     */
+    Domains?: Domains;
+    /**
+     * The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+     */
+    KmsKeyArn?: KmsKeyArn;
+    /**
+     * When true, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to true if an AD Connector directory ID is included in the request.
+     */
+    EnableInteroperability?: Boolean;
+  }
+  export interface CreateOrganizationResponse {
+    /**
+     * The organization ID.
+     */
+    OrganizationId?: OrganizationId;
+  }
   export interface CreateResourceRequest {
     /**
      * The identifier associated with the organization for which the resource is created.
@@ -517,7 +826,7 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
+     * The name for the new user. WorkMail directory user names have a maximum length of 64. All others have a maximum length of 20.
      */
     Name: UserName;
     /**
@@ -573,6 +882,14 @@ declare namespace WorkMail {
   }
   export interface DeleteAliasResponse {
   }
+  export interface DeleteEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization from which the email monitoring configuration is deleted.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DeleteEmailMonitoringConfigurationResponse {
+  }
   export interface DeleteGroupRequest {
     /**
      * The organization that contains the group.
@@ -591,7 +908,7 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the member (user or group)that owns the mailbox.
+     * The identifier of the member (user or group) that owns the mailbox.
      */
     EntityId: WorkMailIdentifier;
     /**
@@ -600,6 +917,58 @@ declare namespace WorkMail {
     GranteeId: WorkMailIdentifier;
   }
   export interface DeleteMailboxPermissionsResponse {
+  }
+  export interface DeleteMobileDeviceAccessOverrideRequest {
+    /**
+     * The Amazon WorkMail organization for which the access override will be deleted.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user for which you want to delete the override. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device for which you delete the override. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+  }
+  export interface DeleteMobileDeviceAccessOverrideResponse {
+  }
+  export interface DeleteMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be deleted.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the rule to be deleted.
+     */
+    MobileDeviceAccessRuleId: MobileDeviceAccessRuleId;
+  }
+  export interface DeleteMobileDeviceAccessRuleResponse {
+  }
+  export interface DeleteOrganizationRequest {
+    /**
+     * The idempotency token associated with the request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * If true, deletes the AWS Directory Service directory associated with the organization.
+     */
+    DeleteDirectory: Boolean;
+  }
+  export interface DeleteOrganizationResponse {
+    /**
+     * The organization ID.
+     */
+    OrganizationId?: OrganizationId;
+    /**
+     * The state of the organization.
+     */
+    State?: String;
   }
   export interface DeleteResourceRequest {
     /**
@@ -649,6 +1018,34 @@ declare namespace WorkMail {
   }
   export interface DeregisterFromWorkMailResponse {
   }
+  export interface DeregisterMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which the domain will be deregistered.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain to deregister in WorkMail and SES. 
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface DeregisterMailDomainResponse {
+  }
+  export interface DescribeEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization for which the email monitoring configuration is described.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeEmailMonitoringConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+     */
+    LogGroupArn?: LogGroupArn;
+  }
   export interface DescribeGroupRequest {
     /**
      * The identifier for the organization under which the group exists.
@@ -684,6 +1081,78 @@ declare namespace WorkMail {
      * The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
      */
     DisabledDate?: Timestamp;
+  }
+  export interface DescribeInboundDmarcSettingsRequest {
+    /**
+     * Lists the ID of the given organization.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeInboundDmarcSettingsResponse {
+    /**
+     * Lists the enforcement setting of the applied policy.
+     */
+    Enforced?: Boolean;
+  }
+  export interface DescribeMailboxExportJobRequest {
+    /**
+     * The mailbox export job ID.
+     */
+    JobId: MailboxExportJobId;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeMailboxExportJobResponse {
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId?: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+     */
+    KmsKeyArn?: KmsKeyArn;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * The S3 bucket prefix.
+     */
+    S3Prefix?: S3ObjectKey;
+    /**
+     * The path to the S3 bucket and file that the mailbox export job is exporting to.
+     */
+    S3Path?: S3ObjectKey;
+    /**
+     * The estimated progress of the mailbox export job, in percentage points.
+     */
+    EstimatedProgress?: Percentage;
+    /**
+     * The state of the mailbox export job.
+     */
+    State?: MailboxExportJobState;
+    /**
+     * Error information for failed mailbox export jobs.
+     */
+    ErrorInfo?: MailboxExportErrorInfo;
+    /**
+     * The mailbox export job start timestamp.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The mailbox export job end timestamp.
+     */
+    EndTime?: Timestamp;
   }
   export interface DescribeOrganizationRequest {
     /**
@@ -817,6 +1286,17 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export type Description = string;
+  export type DeviceId = string;
+  export type DeviceModel = string;
+  export type DeviceModelList = DeviceModel[];
+  export type DeviceOperatingSystem = string;
+  export type DeviceOperatingSystemList = DeviceOperatingSystem[];
+  export type DeviceType = string;
+  export type DeviceTypeList = DeviceType[];
+  export type DeviceUserAgent = string;
+  export type DeviceUserAgentList = DeviceUserAgent[];
+  export type DirectoryId = string;
   export interface DisassociateDelegateFromResourceRequest {
     /**
      * The identifier for the organization under which the resource exists.
@@ -849,7 +1329,36 @@ declare namespace WorkMail {
   }
   export interface DisassociateMemberFromGroupResponse {
   }
+  export interface DnsRecord {
+    /**
+     * The RFC 1035 record type. Possible values: CNAME, A, MX.
+     */
+    Type?: String;
+    /**
+     * The DNS hostname.- For example, domain.example.com.
+     */
+    Hostname?: String;
+    /**
+     * The value returned by the DNS for a query to that hostname and record type.
+     */
+    Value?: String;
+  }
+  export type DnsRecordVerificationStatus = "PENDING"|"VERIFIED"|"FAILED"|string;
+  export type DnsRecords = DnsRecord[];
+  export interface Domain {
+    /**
+     * The fully qualified domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
+     */
+    HostedZoneId?: HostedZoneId;
+  }
+  export type DomainName = string;
+  export type Domains = Domain[];
   export type EmailAddress = string;
+  export type EntityIdentifier = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
   export interface FolderConfiguration {
     /**
@@ -861,7 +1370,7 @@ declare namespace WorkMail {
      */
     Action: RetentionAction;
     /**
-     * The period of time at which the folder configuration action is applied.
+     * The number of days for which the folder-configuration action applies.
      */
     Period?: RetentionPeriod;
   }
@@ -919,6 +1428,38 @@ declare namespace WorkMail {
      */
     FolderConfigurations?: FolderConfigurations;
   }
+  export interface GetMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which the domain is retrieved.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain from which you want to retrieve details.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface GetMailDomainResponse {
+    /**
+     * A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for more details.
+     */
+    Records?: DnsRecords;
+    /**
+     * Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.
+     */
+    IsTestDomain?: Boolean;
+    /**
+     * Specifies whether the domain is the default domain for your organization.
+     */
+    IsDefault?: Boolean;
+    /**
+     *  Indicates the status of the domain ownership verification.
+     */
+    OwnershipVerificationStatus?: DnsRecordVerificationStatus;
+    /**
+     * Indicates the status of a DKIM verification.
+     */
+    DkimVerificationStatus?: DnsRecordVerificationStatus;
+  }
   export interface GetMailboxDetailsRequest {
     /**
      * The identifier for the organization that contains the user whose mailbox details are being requested.
@@ -938,6 +1479,78 @@ declare namespace WorkMail {
      * The current mailbox size, in MB, for the specified user.
      */
     MailboxSize?: MailboxSize;
+  }
+  export interface GetMobileDeviceAccessEffectRequest {
+    /**
+     * The Amazon WorkMail organization to simulate the access effect for.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Device type the simulated user will report.
+     */
+    DeviceType?: DeviceType;
+    /**
+     * Device model the simulated user will report.
+     */
+    DeviceModel?: DeviceModel;
+    /**
+     * Device operating system the simulated user will report.
+     */
+    DeviceOperatingSystem?: DeviceOperatingSystem;
+    /**
+     * Device user agent the simulated user will report.
+     */
+    DeviceUserAgent?: DeviceUserAgent;
+  }
+  export interface GetMobileDeviceAccessEffectResponse {
+    /**
+     * The effect of the simulated access, ALLOW or DENY, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A list of the rules which matched the simulated user input and produced the effect.
+     */
+    MatchedRules?: MobileDeviceAccessMatchedRuleList;
+  }
+  export interface GetMobileDeviceAccessOverrideRequest {
+    /**
+     * The Amazon WorkMail organization to which you want to apply the override.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Identifies the WorkMail user for the override. Accepts the following types of user identities:    User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device to which the override applies. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+  }
+  export interface GetMobileDeviceAccessOverrideResponse {
+    /**
+     * The WorkMail user to which the access override applies.
+     */
+    UserId?: WorkMailIdentifier;
+    /**
+     * The device to which the access override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The date the override was first created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date the description was last modified.
+     */
+    DateModified?: Timestamp;
   }
   export interface Group {
     /**
@@ -967,9 +1580,13 @@ declare namespace WorkMail {
   }
   export type GroupName = string;
   export type Groups = Group[];
+  export type HostedZoneId = string;
+  export type IdempotencyClientToken = string;
   export type IpAddress = string;
   export type IpRange = string;
   export type IpRangeList = IpRange[];
+  export type Jobs = MailboxExportJob[];
+  export type KmsKeyArn = string;
   export interface ListAccessControlRulesRequest {
     /**
      * The identifier for the organization.
@@ -1062,6 +1679,54 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListMailDomainsRequest {
+    /**
+     * The Amazon WorkMail organization for which to list domains.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not require a token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMailDomainsResponse {
+    /**
+     * The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail organization, along with the information about whether the domain is or isn't the default.
+     */
+    MailDomains?: MailDomains;
+    /**
+     * The token to use to retrieve the next page of results. The value becomes null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMailboxExportJobsRequest {
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMailboxExportJobsResponse {
+    /**
+     * The mailbox export job details.
+     */
+    Jobs?: Jobs;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListMailboxPermissionsRequest {
     /**
      * The identifier of the organization under which the user, group, or resource exists.
@@ -1089,6 +1754,50 @@ declare namespace WorkMail {
      * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
      */
     NextToken?: NextToken;
+  }
+  export interface ListMobileDeviceAccessOverridesRequest {
+    /**
+     * The Amazon WorkMail organization under which to list mobile device access overrides.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId?: EntityIdentifier;
+    /**
+     * The mobile device to which the access override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not require a token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMobileDeviceAccessOverridesResponse {
+    /**
+     * The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.
+     */
+    Overrides?: MobileDeviceAccessOverridesList;
+    /**
+     * The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMobileDeviceAccessRulesRequest {
+    /**
+     * The Amazon WorkMail organization for which to list the rules.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface ListMobileDeviceAccessRulesResponse {
+    /**
+     * The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
+     */
+    Rules?: MobileDeviceAccessRulesList;
   }
   export interface ListOrganizationsRequest {
     /**
@@ -1198,6 +1907,59 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export type LogGroupArn = string;
+  export interface MailDomainSummary {
+    /**
+     * The domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * Whether the domain is default or not.
+     */
+    DefaultDomain?: Boolean;
+  }
+  export type MailDomains = MailDomainSummary[];
+  export type MailboxExportErrorInfo = string;
+  export interface MailboxExportJob {
+    /**
+     * The identifier of the mailbox export job.
+     */
+    JobId?: MailboxExportJobId;
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId?: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * The path to the S3 bucket and file that the mailbox export job exports to.
+     */
+    S3Path?: S3ObjectKey;
+    /**
+     * The estimated progress of the mailbox export job, in percentage points.
+     */
+    EstimatedProgress?: Percentage;
+    /**
+     * The state of the mailbox export job.
+     */
+    State?: MailboxExportJobState;
+    /**
+     * The mailbox export job start timestamp.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The mailbox export job end timestamp.
+     */
+    EndTime?: Timestamp;
+  }
+  export type MailboxExportJobId = string;
+  export type MailboxExportJobState = "RUNNING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
   export type MailboxQuota = number;
   export type MailboxSize = number;
   export type MaxResults = number;
@@ -1229,6 +1991,107 @@ declare namespace WorkMail {
   }
   export type MemberType = "GROUP"|"USER"|string;
   export type Members = Member[];
+  export interface MobileDeviceAccessMatchedRule {
+    /**
+     * Identifier of the rule that a simulated user matches.
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+    /**
+     * Name of a rule that a simulated user matches.
+     */
+    Name?: MobileDeviceAccessRuleName;
+  }
+  export type MobileDeviceAccessMatchedRuleList = MobileDeviceAccessMatchedRule[];
+  export interface MobileDeviceAccessOverride {
+    /**
+     * The WorkMail user to which the access override applies.
+     */
+    UserId?: WorkMailIdentifier;
+    /**
+     * The device to which the override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The date the override was first created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date the override was last modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type MobileDeviceAccessOverridesList = MobileDeviceAccessOverride[];
+  export interface MobileDeviceAccessRule {
+    /**
+     * The ID assigned to a mobile access rule. 
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+    /**
+     * The name of a mobile access rule.
+     */
+    Name?: MobileDeviceAccessRuleName;
+    /**
+     * The description of a mobile access rule.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that a rule will match. 
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that a rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that a rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that a rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that a rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that a rule will not match. All other device types will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device user agents that a rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * Device user agents that a rule will not match. All other device user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * The date and time at which an access rule was created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date and time at which an access rule was modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type MobileDeviceAccessRuleDescription = string;
+  export type MobileDeviceAccessRuleEffect = "ALLOW"|"DENY"|string;
+  export type MobileDeviceAccessRuleId = string;
+  export type MobileDeviceAccessRuleName = string;
+  export type MobileDeviceAccessRulesList = MobileDeviceAccessRule[];
   export type NextToken = string;
   export type OrganizationId = string;
   export type OrganizationName = string;
@@ -1243,6 +2106,10 @@ declare namespace WorkMail {
      */
     Alias?: OrganizationName;
     /**
+     * The default email domain associated with the organization.
+     */
+    DefaultMailDomain?: DomainName;
+    /**
      * The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
      */
     ErrorMessage?: String;
@@ -1252,6 +2119,7 @@ declare namespace WorkMail {
     State?: String;
   }
   export type Password = string;
+  export type Percentage = number;
   export interface Permission {
     /**
      * The identifier of the user, group, or resource to which the permissions are granted.
@@ -1314,6 +2182,34 @@ declare namespace WorkMail {
   }
   export interface PutAccessControlRuleResponse {
   }
+  export interface PutEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization for which the email monitoring configuration is set.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+     */
+    LogGroupArn: LogGroupArn;
+  }
+  export interface PutEmailMonitoringConfigurationResponse {
+  }
+  export interface PutInboundDmarcSettingsRequest {
+    /**
+     * The ID of the organization that you are applying the DMARC policy to. 
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Enforces or suspends a policy after it's applied.
+     */
+    Enforced: BooleanObject;
+  }
+  export interface PutInboundDmarcSettingsResponse {
+  }
   export interface PutMailboxPermissionsRequest {
     /**
      * The identifier of the organization under which the user, group, or resource exists.
@@ -1333,6 +2229,30 @@ declare namespace WorkMail {
     PermissionValues: PermissionValues;
   }
   export interface PutMailboxPermissionsResponse {
+  }
+  export interface PutMobileDeviceAccessOverrideRequest {
+    /**
+     * Identifies the Amazon WorkMail organization for which you create the override.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user for which you create the override. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device for which you create the override. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+  }
+  export interface PutMobileDeviceAccessOverrideResponse {
   }
   export interface PutRetentionPolicyRequest {
     /**
@@ -1357,6 +2277,22 @@ declare namespace WorkMail {
     FolderConfigurations: FolderConfigurations;
   }
   export interface PutRetentionPolicyResponse {
+  }
+  export interface RegisterMailDomainRequest {
+    /**
+     * Idempotency token used when retrying requests.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The Amazon WorkMail organization under which you're creating the domain.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The name of the mail domain to create in Amazon WorkMail and SES.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface RegisterMailDomainResponse {
   }
   export interface RegisterToWorkMailRequest {
     /**
@@ -1427,7 +2363,50 @@ declare namespace WorkMail {
   export type Resources = Resource[];
   export type RetentionAction = "NONE"|"DELETE"|"PERMANENTLY_DELETE"|string;
   export type RetentionPeriod = number;
+  export type RoleArn = string;
+  export type S3BucketName = string;
+  export type S3ObjectKey = string;
   export type ShortString = string;
+  export interface StartMailboxExportJobRequest {
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken: IdempotencyClientToken;
+    /**
+     * The identifier associated with the organization.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+     */
+    KmsKeyArn: KmsKeyArn;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName: S3BucketName;
+    /**
+     * The S3 bucket prefix.
+     */
+    S3Prefix: S3ObjectKey;
+  }
+  export interface StartMailboxExportJobResponse {
+    /**
+     * The job ID.
+     */
+    JobId?: MailboxExportJobId;
+  }
   export type String = string;
   export interface Tag {
     /**
@@ -1468,6 +2447,18 @@ declare namespace WorkMail {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateDefaultMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which to list domains.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain name that will become the default domain.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface UpdateDefaultMailDomainResponse {
+  }
   export interface UpdateMailboxQuotaRequest {
     /**
      * The identifier for the organization that contains the user for whom to update the mailbox quota.
@@ -1483,6 +2474,62 @@ declare namespace WorkMail {
     MailboxQuota: MailboxQuota;
   }
   export interface UpdateMailboxQuotaResponse {
+  }
+  export interface UpdateMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be updated.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the rule to be updated.
+     */
+    MobileDeviceAccessRuleId: MobileDeviceAccessRuleId;
+    /**
+     * The updated rule name.
+     */
+    Name: MobileDeviceAccessRuleName;
+    /**
+     * The updated rule description.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that the updated rule will match.
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that the updated rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that the updated rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that the updated rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that the updated rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that the updated rule will not match. All other device operating systems will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * User agents that the updated rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * User agents that the updated rule will not match. All other user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+  }
+  export interface UpdateMobileDeviceAccessRuleResponse {
   }
   export interface UpdatePrimaryEmailAddressRequest {
     /**
@@ -1558,6 +2605,7 @@ declare namespace WorkMail {
   export type UserName = string;
   export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string;
   export type Users = User[];
+  export type WorkMailDomainName = string;
   export type WorkMailIdentifier = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
