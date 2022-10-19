@@ -1,6 +1,3 @@
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable unicorn/no-keyword-prefix */
-
 module.exports = {
   env: {
     es2022: true,
@@ -11,6 +8,9 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/all",
     "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest-extended/all",
+    "plugin:jest-formatting/strict",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -44,4 +44,9 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    jest: {
+      version: 29,
+    },
+  },
 };
