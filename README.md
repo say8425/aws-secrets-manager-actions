@@ -1,81 +1,90 @@
 # AWS Secrets Manager Actions
 
-[![npm version](https://img.shields.io/npm/v/aws-secrets-manager-actions?color=cb3837&logo=npm)](https://www.npmjs.com/package/aws-secrets-manager-actions)
+[![NPM version](https://img.shields.io/npm/v/aws-secrets-manager-actions?color=cb3837&logo=npm)](https://www.npmjs.com/package/aws-secrets-manager-actions)
+[![AWS Secrets Manager](https://img.shields.io/badge/AWS-Secrets_Manager-FF9900?logo=Amazon+AWS&logoColor=FF9900)](https://aws.amazon.com/secrets-manager)
 [![GitHub Actions Test](https://github.com/say8425/aws-secrets-manager-actions/workflows/Test/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3ATest)
 [![GitHub Actions Release](https://github.com/say8425/aws-secrets-manager-actions/workflows/Release/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3ARelease)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/say8425/aws-secrets-manager-actions/blob/master/LICENSE)
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/say8425/aws-secrets-manager-actions/blob/master/LICENSE)
 
 This GitHub Action lets you export secrets stored in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager) to environment values in your GitHub runner.
 
 ## Usage
 
-Add the AWS IAM keys and the secret name that you want to use from your AWS Secrets Manager secrets list to your GitHub repo secrets. Then, in the GitHub actions yaml, add the following step.
+Add the AWS IAM keys and the secret name that you want to use AWS Secrets Manager secrets from GitHub Action. There are two ways to use this action.
 
-1. Using github [openid-connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) (Recommented)
-
-```yaml
-steps:
- - name: Store ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v2
-   with:
-     AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
-     SECRET_NAME: ${{ env.SECRET_NAME }}
-     OUTPUT_PATH: '.env' # optional
-```
-
-2. Using github secrets
+1. GitHub [OpenID Connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) (Recommended)
 
 ```yaml
 steps:
- - name: Export ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v2
-   with:
-     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-     AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-     SECRET_NAME: ${{ secrets.SECRET_NAME }}
-     OUTPUT_PATH: '.env' # optional
+  - name: Configure AWS credentials
+    uses: aws-actions/configure-aws-credentials@v1-node16
+    with:
+      role-to-assume: arn:aws:iam::1234567890:role/my-secret
+      aws-region: "YOUR-AWS-REGION"
+
+  - name: Export ENV from AWS SecretManager
+    uses: say8425/aws-secrets-manager-actions@v3
+    with:
+      AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
+      SECRET_NAME: "YOUR-SECRET_NAME"
+      OUTPUT_PATH: ".env" # optional
 ```
 
-### AWS IAM
+2. GitHub [Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 
-You need an [AWS IAM](https://aws.amazon.com/iam) user that has policies to access/read the AWS Secrets Manager secret. Add this IAM user's access id/keys as `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and region as `AWS_DEFAULT_REGION` in your repo's [GitHub Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+```yaml
+steps:
+  - name: Export ENV from AWS SecretManager
+    uses: say8425/aws-secrets-manager-actions@v3
+    with:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      SECRET_NAME: ${{ secrets.SECRET_NAME }}
+      OUTPUT_PATH: ".env" # optional
+```
+
+### Credentials
+
+You need an [AWS IAM](https://aws.amazon.com/iam) user that has policies to access/read the AWS Secrets Manager secret.
 
 #### Policy
 
-An example policy to provide the permissions to the user is given below:
+An example policy to provide the permissions to the user is given below. The example has the full access to the AWS Secrets Manager resources.
+But we recommend to [grant least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) to the credentials used in GitHub Actions workflows.
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "secretsmanager:GetSecretValue",
-            "Resource": "*"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": "secretsmanager:GetSecretValue",
+      "Resource": "*"
+    }
+  ]
 }
 ```
-
-We recommend being more specific with the `Resource` in the policy by adding the secret ARN.
 
 Get more information at [AWS User Guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_identity-based-policies.html#permissions_grant-get-secret-value-to-one-secret).
 
 ### Secret Name
 
-This is the secret name that you want to read the secrets from. Only one secret name is supported.
+The secret name is list of secrets that you want to export to environment values. Multiple secrets not supported yet.
 
 ### Environment Values
 
 Your secrets will be exported as environment values into the github runner.
-These environment values are masked with `***` in logs in the GitHub Actions for security purposes.
+These environment values will be masked with `***` in the logs.
 
-#### Raw string values
+### Invalid Secret
 
-Most of the secrets can be parsed. However, in some case, parsing of secrets can fail. An example case is an invalid json.
-In such cases, the unparsed raw sting is stored in `asm_secret` env key.  
+![Invalid Secret Key Value](docs/invalid%20secret%20key%20value.png)
+![Invalid Secret Plaintext](docs/invalid%20secret%20plaintext.png)
+
+Invalid secret key value or plaintext will not be exported as environment values.
+Instead, it will be stored in `asm_secret` env key.
 
 ### Export environment variables to file
 
