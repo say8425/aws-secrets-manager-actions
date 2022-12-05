@@ -1,5 +1,9 @@
-import { ResourceNotFoundException } from "@aws-sdk/client-secrets-manager";
+import {
+  GetSecretValueCommand,
+  ResourceNotFoundException,
+} from "@aws-sdk/client-secrets-manager";
 import { faker } from "@faker-js/faker";
+import { mockClient } from "aws-sdk-client-mock";
 
 import { client } from "../configuration";
 import { getSecretValueCommand } from "./get-secret-value.command";
@@ -7,13 +11,28 @@ import { getSecretValueCommand } from "./get-secret-value.command";
 describe("getSecretValueCommand", () => {
   const secretsManagerClient = client({
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+      accessKeyId: faker.random.alphaNumeric(10),
+      secretAccessKey: faker.random.alphaNumeric(10),
     },
-    region: process.env.AWS_DEFAULT_REGION,
+    region: "ap-southeast-2",
   });
 
   describe("when the secret exists", () => {
+    beforeEach(() => {
+      const secretsManagerMock = mockClient(secretsManagerClient);
+      secretsManagerMock.on(GetSecretValueCommand).resolvesOnce({
+        SecretString: JSON.stringify({
+          SCIENTIFIC_NAME: "Pygoscelis adeliae",
+          MIN_HEIGHT: 46,
+          MAX_HEIGHT: 71,
+          MIN_WEIGHT: 3.6,
+          MAX_WEIGHT: 6,
+          SWIMMING_SPEED: 8,
+          LEAPING_METERS: 3,
+        }),
+      });
+    });
+
     it("should return the secret value as JSON", async () => {
       const secretName = "AdeliePenguin";
       const result = await getSecretValueCommand(
@@ -34,6 +53,13 @@ describe("getSecretValueCommand", () => {
   });
 
   describe("when the secret is empty", () => {
+    beforeEach(() => {
+      const secretsManagerMock = mockClient(secretsManagerClient);
+      secretsManagerMock.on(GetSecretValueCommand).resolvesOnce({
+        SecretString: JSON.stringify({}),
+      });
+    });
+
     it("should return empty json", async () => {
       const secretName = "AdeliePenguin-empty";
       const result = await getSecretValueCommand(
@@ -46,6 +72,13 @@ describe("getSecretValueCommand", () => {
   });
 
   describe("when the secret is invalid json", () => {
+    beforeEach(() => {
+      const secretsManagerMock = mockClient(secretsManagerClient);
+      secretsManagerMock.on(GetSecretValueCommand).resolvesOnce({
+        SecretString: "{INVALID_KEY: INVALID_VALUE}",
+      });
+    });
+
     it("should throw an error", async () => {
       const secretName = "AdeliePenguin-invalid";
       const result = getSecretValueCommand(secretsManagerClient, secretName);
@@ -55,6 +88,15 @@ describe("getSecretValueCommand", () => {
   });
 
   describe("when the secret does not exist", () => {
+    beforeEach(() => {
+      const secretsManagerMock = mockClient(secretsManagerClient);
+      secretsManagerMock
+        .on(GetSecretValueCommand)
+        .rejectsOnce(
+          new ResourceNotFoundException({ message: "", $metadata: {} }),
+        );
+    });
+
     it("should throw an error", async () => {
       const secretName = faker.random.alphaNumeric(10);
       const result = getSecretValueCommand(secretsManagerClient, secretName);
