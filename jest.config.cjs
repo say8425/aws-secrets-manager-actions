@@ -9,4 +9,5 @@ module.exports = {
   setupFiles: ["dotenv/config"],
   setupFilesAfterEnv: ["jest-extended/all"],
   testMatch: ["**/*.test.ts"],
+  coverageDirectory: "./coverage",
 };
