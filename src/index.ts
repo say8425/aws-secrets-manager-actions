@@ -3,6 +3,7 @@ import * as core from "@actions/core";
 import {
   exportSecretValue,
   maskSecretValue,
+  outputSecretValue,
   writeSecretValue,
 } from "./gh-action";
 import {
@@ -34,6 +35,7 @@ const run = async () => {
 
   maskSecretValue(secretValue);
   exportSecretValue(secretValue);
+  outputSecretValue(secretValue);
 
   if (outputPath) {
     writeSecretValue(secretValue, outputPath);
