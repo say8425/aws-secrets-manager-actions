@@ -84,7 +84,7 @@ These environment values will be masked with `***` in the logs.
 ![Invalid Secret Plaintext](docs/invalid%20secret%20plaintext.png)
 
 Invalid secret key value or plaintext will not be exported as environment values.
-Instead, it will be stored in `asm_secret` env key.
+Instead, it will be stored in `INVALID_ASM_SECRET` env key.
 
 ### Export environment variables to file
 

@@ -1,9 +1,9 @@
 import * as fs from "node:fs";
 
-export const writeSecretValue = (
-  secretValue: Record<string, unknown>,
-  path: string,
-) => {
-  const secretValueString = JSON.stringify(secretValue);
+import { SecretValue } from "../types/secret-value";
+
+export const writeSecretValue = (secretValue: SecretValue, path: string) => {
+  const secretValueString =
+    typeof secretValue === "string" ? secretValue : JSON.stringify(secretValue);
   fs.writeFileSync(path, secretValueString, "utf8");
 };

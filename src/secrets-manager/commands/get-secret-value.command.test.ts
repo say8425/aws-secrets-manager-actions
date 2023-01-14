@@ -79,11 +79,14 @@ describe("getSecretValueCommand", () => {
       });
     });
 
-    it("should throw an error", async () => {
+    it("should return raw secret", async () => {
       const secretName = "AdeliePenguin-invalid";
-      const result = getSecretValueCommand(secretsManagerClient, secretName);
+      const result = await getSecretValueCommand(
+        secretsManagerClient,
+        secretName,
+      );
 
-      await expect(result).rejects.toThrow(SyntaxError);
+      expect(result).toEqual("{INVALID_KEY: INVALID_VALUE}");
     });
   });
 
