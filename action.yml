@@ -1,4 +1,5 @@
 name: 'aws-secrets-manager-actions'
+author: 'Penguin'
 description: 'GitHub Actions for AWS Secrets Manager'
 inputs:
   SECRET_NAME:
