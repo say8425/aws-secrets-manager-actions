@@ -15,7 +15,7 @@ Add the AWS IAM keys and the secret name that you want to use from your AWS Secr
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.1
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.2
    with:
      AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
      SECRET_NAME: ${{ env.SECRET_NAME }}
@@ -27,7 +27,7 @@ steps:
 ```yaml
 steps:
  - name: Export ENV from AWS SecretManager
-   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.1
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.2
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

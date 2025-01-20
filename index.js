@@ -3,6 +3,7 @@ const aws = require('aws-sdk')
 const fs = require('fs').promises
 
 const outputPath = core.getInput('OUTPUT_PATH')
+const outputFileType = core.getInput('OUTPUT_FILE_TYPE')
 
 const AWSConfig = {
   accessKeyId: core.getInput('AWS_ACCESS_KEY_ID') || process.env.AWS_ACCESS_KEY_ID,
@@ -40,8 +41,13 @@ async function getSecretValue (secretsManager, secretName) {
         core.exportVariable(key, value)
       })
       if (outputPath) {
-        const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
-        await fs.writeFile(outputPath, secretsAsEnv)
+        core.info(`Export File ${outputPath}`)
+        if (outputFileType.toLowerCase() === 'json') {
+          await fs.writeFile(outputPath, secretString)
+        } else {
+          const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
+          await fs.writeFile(outputPath, secretsAsEnv)
+        }
       }
     } catch (e) {
       core.warning('Parsing asm secret is failed. Secret will be store in asm_secret')
