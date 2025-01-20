@@ -1,7 +1,7 @@
 {
-  "name": "aws-secrets-manager-actions",
+  "name": "aws-secrets-manager-actions-ng",
   "version": "2.3.0",
-  "description": "GitHub Actions for AWS Secrets Manager",
+  "description": "GitHub Actions for AWS Secrets Manager (Add support Node.js 20)",
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js index.test.js",
