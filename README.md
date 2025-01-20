@@ -15,7 +15,7 @@ Add the AWS IAM keys and the secret name that you want to use from your AWS Secr
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: infludeo-dev/aws-secrets-manager-actions@master
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.1
    with:
      AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
      SECRET_NAME: ${{ env.SECRET_NAME }}
@@ -27,7 +27,7 @@ steps:
 ```yaml
 steps:
  - name: Export ENV from AWS SecretManager
-   uses: infludeo-dev/aws-secrets-manager-actions@master
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.1
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -91,5 +91,5 @@ or [Pull Requests](https://github.com/infludeo-dev/aws-secrets-manager-actions/p
 
 This project is [MIT](https://github.com/infludeo-dev/aws-secrets-manager-action/blob/master/LICENSE) licensed.
 
--  Original Repository : [https://github.com/say8425](https://github.com/say8425/aws-secrets-manager-action)
+-  Original Repository : [https://github.com/say8425/aws-secrets-manager-action](https://github.com/say8425/aws-secrets-manager-action)
    -  & Support Node.js 20 [by](https://github.com/say8425/aws-secrets-manager-actions/pull/132)
