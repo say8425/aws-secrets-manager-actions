@@ -1,6 +1,6 @@
 {
   "name": "aws-secrets-manager-actions",
-  "version": "1.2.1",
+  "version": "2.3.0",
   "description": "GitHub Actions for AWS Secrets Manager",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/say8425/aws-secrets-manager-actions.git"
+    "url": "git+https://github.com/infludeo-dev/aws-secrets-manager-actions.git"
   },
   "keywords": [
     "aws",
@@ -18,18 +18,18 @@
     "github",
     "secrets-manager"
   ],
-  "author": "Penguin",
+  "author": "Infludeo Inc. (Original ",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/say8425/aws-secrets-manager-actions/issues"
+    "url": "https://github.com/infludeo-dev/aws-secrets-manager-actions/issues"
   },
-  "homepage": "https://github.com/say8425/aws-secrets-manager-actions",
+  "homepage": "https://github.com/infludeo-dev/aws-secrets-manager-actions",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "aws-sdk": "^2.1070.0"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.1",
+    "@vercel/ncc": "^0.38.1",
     "dotenv": "^8.2.0",
     "eslint": "7.4.0",
     "eslint-plugin-import": "^2.20.2",

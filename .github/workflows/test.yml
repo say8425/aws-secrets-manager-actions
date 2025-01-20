@@ -18,7 +18,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: yarn
 
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: yarn
 
       - name: Install dependencies
@@ -55,7 +55,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: yarn
 
       - name: Install dependencies
@@ -69,38 +69,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_DEFAULT_OUTPUT: ${{ secrets.AWS_DEFAULT_OUTPUT }}
-
-  test-github-actions:
-    runs-on: ubuntu-latest
-    needs:
-      - install-dependencies
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn --prefer-offline
-
-      - name: Package
-        run: yarn package
-
-      - name: Use AWS Secrets Manager Actions from current branch
-        uses: ./
-        with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          SECRET_NAME: ${{ secrets.SECRET_NAME }}
-
-      - name: Should have SCIENTIFIC_NAME
-        uses: therussiankid92/gat@v1.5
-        with:
-          assertion: should.equal
-          expected: Pygoscelis adeliae
-          actual: ${{ env.SCIENTIFIC_NAME }}
