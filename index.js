@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 const aws = require('aws-sdk')
-const fs = require('fs')
+const fs = require('fs').promises
 
 const outputPath = core.getInput('OUTPUT_PATH')
 
@@ -41,13 +41,13 @@ async function getSecretValue (secretsManager, secretName) {
       })
       if (outputPath) {
         const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
-        fs.writeFileSync(outputPath, secretsAsEnv)
+        await fs.writeFile(outputPath, secretsAsEnv)
       }
     } catch (e) {
       core.warning('Parsing asm secret is failed. Secret will be store in asm_secret')
       core.exportVariable('asm_secret', secretString)
       if (outputPath) {
-        fs.writeFileSync(outputPath, secretString)
+        await fs.writeFile(outputPath, secretString)
       }
     }
   } catch (err) {
