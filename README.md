@@ -1,9 +1,8 @@
 # AWS Secrets Manager Actions
 
-[![npm version](https://img.shields.io/npm/v/aws-secrets-manager-actions?color=cb3837&logo=npm)](https://www.npmjs.com/package/aws-secrets-manager-actions)
-[![GitHub Actions Test](https://github.com/say8425/aws-secrets-manager-actions/workflows/Test/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3ATest)
-[![GitHub Actions Release](https://github.com/say8425/aws-secrets-manager-actions/workflows/Release/badge.svg)](https://github.com/say8425/aws-secrets-manager-actions/actions?query=workflow%3ARelease)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/say8425/aws-secrets-manager-actions/blob/master/LICENSE)
+[![GitHub Actions Test](https://github.com/infludeo-dev/aws-secrets-manager-actions/workflows/Test/badge.svg)](https://github.com/infludeo-dev/aws-secrets-manager-actions/actions?query=workflow%3ATest)
+[![GitHub Actions Release](https://github.com/infludeo-dev/aws-secrets-manager-actions/workflows/Release/badge.svg)](https://github.com/infludeo-dev/aws-secrets-manager-actions/actions?query=workflow%3ARelease)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/infludeo-dev/aws-secrets-manager-actions/blob/master/LICENSE)
 
 This GitHub Action lets you export secrets stored in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager) to environment values in your GitHub runner.
 
@@ -16,11 +15,12 @@ Add the AWS IAM keys and the secret name that you want to use from your AWS Secr
 ```yaml
 steps:
  - name: Store ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v2
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.2
    with:
      AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
      SECRET_NAME: ${{ env.SECRET_NAME }}
      OUTPUT_PATH: '.env' # optional
+     OUTPUT_FILE_TYPE: 'json' # optional
 ```
 
 2. Using github secrets
@@ -28,13 +28,14 @@ steps:
 ```yaml
 steps:
  - name: Export ENV from AWS SecretManager
-   uses: say8425/aws-secrets-manager-actions@v2
+   uses: infludeo-dev/aws-secrets-manager-actions@v2.3.2
    with:
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
      SECRET_NAME: ${{ secrets.SECRET_NAME }}
      OUTPUT_PATH: '.env' # optional
+     OUTPUT_FILE_TYPE: 'json' # optional
 ```
 
 ### AWS IAM
@@ -85,9 +86,12 @@ When `OUTPUT_PATH` is defined, the GitHub action writes the environment variable
 ## Contributing
 
 Your contributions are always welcome!
-Feel free to check [issues](https://github.com/say8425/aws-secrets-manager-action/issues)
-or [Pull Requests](https://github.com/say8425/aws-secrets-manager-actions/pulls)
+Feel free to check [issues](https://github.com/infludeo-dev/aws-secrets-manager-action/issues)
+or [Pull Requests](https://github.com/infludeo-dev/aws-secrets-manager-actions/pulls)
 
 ## License
 
-This project is [MIT](https://github.com/say8425/aws-secrets-manager-action/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/infludeo-dev/aws-secrets-manager-action/blob/master/LICENSE) licensed.
+
+-  Original Repository : [https://github.com/say8425/aws-secrets-manager-action](https://github.com/say8425/aws-secrets-manager-action)
+   -  & Support Node.js 20 [by](https://github.com/say8425/aws-secrets-manager-actions/pull/132)
