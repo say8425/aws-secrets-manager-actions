@@ -20,6 +20,7 @@ steps:
      AWS_DEFAULT_REGION: "YOUR-AWS-REGION"
      SECRET_NAME: ${{ env.SECRET_NAME }}
      OUTPUT_PATH: '.env' # optional
+     OUTPUT_FILE_TYPE: 'json' # optional
 ```
 
 2. Using github secrets
@@ -34,6 +35,7 @@ steps:
      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
      SECRET_NAME: ${{ secrets.SECRET_NAME }}
      OUTPUT_PATH: '.env' # optional
+     OUTPUT_FILE_TYPE: 'json' # optional
 ```
 
 ### AWS IAM

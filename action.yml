@@ -19,6 +19,9 @@ inputs:
   OUTPUT_PATH:
     description: 'Set output file where variables are write'
     required: false
+  OUTPUT_FILE_TYPE:
+    description: 'Set output file type'
+    required: false
 runs:
   using: 'node20'
   main: 'dist/index.js'
