@@ -2,8 +2,8 @@ const core = require('@actions/core')
 const aws = require('aws-sdk')
 const fs = require('fs').promises
 
-const outputPath = core.getInput('OUTPUT_PATH')
-const outputFileType = core.getInput('OUTPUT_FILE_TYPE')
+const outputPath = core.getInput('OUTPUT_PATH') || process.env.OUTPUT_PATH
+const outputFileType = core.getInput('OUTPUT_FILE_TYPE') || process.env.OUTPUT_FILE_TYPE
 
 const AWSConfig = {
   accessKeyId: core.getInput('AWS_ACCESS_KEY_ID') || process.env.AWS_ACCESS_KEY_ID,
@@ -42,7 +42,7 @@ async function getSecretValue (secretsManager, secretName) {
       })
       if (outputPath) {
         core.info(`Export File ${outputPath}`)
-        if (outputFileType.toLowerCase() === 'json') {
+        if (outputFileType && outputFileType.toLowerCase() === 'json') {
           await fs.writeFile(outputPath, secretString)
         } else {
           const secretsAsEnv = Object.entries(parsedSecret).map(([key, value]) => `${key}=${value}`).join('\n')
