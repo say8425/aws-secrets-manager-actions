@@ -18,7 +18,7 @@
     "github",
     "secrets-manager"
   ],
-  "author": "Infludeo Inc. (Original ",
+  "author": "Infludeo Inc.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/infludeo-dev/aws-secrets-manager-actions/issues"
